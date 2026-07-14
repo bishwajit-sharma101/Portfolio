@@ -36,15 +36,6 @@ function App() {
         
         // Skip files, external links, or downloads
         if (path && !path.includes('.') && !anchor.hasAttribute('download')) {
-          
-          // Check if it is the locked Project Delta
-          const isLockedProjectDelta = path.includes('/project/04') && sessionStorage.getItem('project_delta_unlocked') !== 'true';
-          
-          if (isLockedProjectDelta) {
-            // Let click event bubble normally so the projects component shows the passcode modal
-            return;
-          }
-
           // Intercept navigation
           e.preventDefault();
           e.stopPropagation();

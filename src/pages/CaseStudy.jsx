@@ -50,20 +50,6 @@ const projectDatabase = {
     ],
     challenges: 'Setting up real-time telemetry pipelines across dockerized environments introduced significant processing overhead and metric delays.',
     learnings: 'I learned to design lightweight, non-blocking telemetry agents in Go, decreasing instrumentation overhead to less than 1.5% CPU utilization.'
-  },
-  '04': {
-    title: 'Project Delta',
-    description: 'Commercial design system and telemetry platform built under NDA restrictions.',
-    github: 'https://github.com/bishwajit-sharma101/project-delta',
-    tech: ['Go', 'gRPC', 'Kubernetes', 'AWS', 'Grafana', 'React', 'TypeScript', 'PostgreSQL', 'Docker', 'Row Level Security'],
-    problem: 'This project is subject to strict NDA rules. The core challenge was designing a centralized, multi-tenant metric analyzer capable of processing millions of data points per minute for high-security enterprise cloud deployments.',
-    features: [
-      'Secure multi-tenant data isolations using role-based routing at database levels.',
-      'Sub-second query aggregation filters across custom telemetry timelines.',
-      'Fully compliant GDPR and SOC2 audit log compilers.'
-    ],
-    challenges: 'Ensuring absolute database-level data isolation between tenants while sharing common analytics compute instances without introducing performance bottleneck overhead.',
-    learnings: 'I learned to configure row-level security (RLS) policies in PostgreSQL and built secure custom query compilers validating parameters against user keys.'
   }
 };
 
@@ -74,12 +60,6 @@ export default function CaseStudy() {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    // SECURITY REDIRECT FOR NDA GATED PROJECTS
-    if (id === '04' && sessionStorage.getItem('project_delta_unlocked') !== 'true') {
-      navigate('/');
-      return;
-    }
-
     window.scrollTo(0, 0);
     
     let ctx = gsap.context(() => {

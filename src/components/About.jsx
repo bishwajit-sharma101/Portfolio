@@ -2,11 +2,10 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { 
-  SiReact, SiNextdotjs, SiTypescript, SiGreensock, SiRedux, SiVite, SiHtml5, SiCss, SiTailwindcss, SiJavascript, SiSass, SiThreedotjs,
-  SiNodedotjs, SiGo, SiPostgresql, SiGraphql, SiRedis, SiExpress, SiMongodb, SiPython, SiRust, SiPrisma, SiFirebase,
-  SiGooglecloud, SiDocker, SiKubernetes, SiTerraform, SiServerless, SiGithubactions, SiLinux, SiNginx, SiVercel, SiNetlify, SiCloudflare
+  SiReact, SiNextdotjs, SiTypescript, SiGreensock, SiRedux, SiFramer, SiHtml5, SiCss, SiTailwindcss, SiJavascript,
+  SiNodedotjs, SiExpress, SiMongodb, SiSocketdotio, SiJsonwebtokens, SiGoogle, SiPytorch, SiRedis, SiRabbitmq, SiSupabase,
+  SiLinux, SiGit, SiGithub, SiVercel, SiPostman, SiDeepmind
 } from 'react-icons/si';
-import { FaAws } from 'react-icons/fa';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,52 +16,42 @@ const techCategories = [
     icons: [
       { Icon: SiReact, name: 'React', tooltip: 'Component Architecture • Hooks', featured: true },
       { Icon: SiNextdotjs, name: 'Next.js', tooltip: 'SSR • App Router • Server Actions', featured: true },
-      { Icon: SiTypescript, name: 'TypeScript', tooltip: 'Type-Safe Scalability', featured: true },
+      { Icon: SiTypescript, name: 'TypeScript', tooltip: 'Type-Safe Scalability', featured: false },
+      { Icon: SiJavascript, name: 'JavaScript', tooltip: 'Modern ES6+ Logic Engine', featured: true },
+      { Icon: SiTailwindcss, name: 'Tailwind CSS', tooltip: 'Utility-First Styling Design', featured: true },
       { Icon: SiGreensock, name: 'GSAP', tooltip: 'High-Performance Motion Systems', featured: true },
-      { Icon: SiRedux, name: 'Redux', tooltip: 'Global State Engines', featured: false },
-      { Icon: SiVite, name: 'Vite', tooltip: 'Fast ESM Build Tooling', featured: false },
       { Icon: SiHtml5, name: 'HTML5', tooltip: 'Semantic Web Architecture', featured: false },
       { Icon: SiCss, name: 'CSS3', tooltip: 'Custom Layout Systems • Flex/Grid', featured: false },
-      { Icon: SiTailwindcss, name: 'Tailwind', tooltip: 'Utility-First Styling Design', featured: false },
-      { Icon: SiJavascript, name: 'JavaScript', tooltip: 'Modern ES6+ Logic Engine', featured: true },
-      { Icon: SiSass, name: 'Sass', tooltip: 'Modular CSS Preprocessing', featured: false },
-      { Icon: SiThreedotjs, name: 'Three.js', tooltip: 'WebGL Shaders • 3D Mathematics', featured: true }
+      { Icon: SiRedux, name: 'Redux Toolkit', tooltip: 'Global State Management', featured: false },
+      { Icon: SiFramer, name: 'Framer Motion', tooltip: 'Declarative React Animation Library', featured: true }
     ]
   },
   {
     title: 'Backend',
-    description: 'Architecting robust, transactional engines. I specialize in designing scalable RESTful & GraphQL APIs, microservices, high-performance database schemas, and caching layers.',
+    description: 'Architecting robust, transactional engines. I specialize in designing scalable RESTful APIs, document databases, and real-time syncing architectures.',
     icons: [
       { Icon: SiNodedotjs, name: 'Node.js', tooltip: 'Event-Driven Async Runtime', featured: true },
-      { Icon: SiGo, name: 'Go', tooltip: 'Highly Concurrent Microservices', featured: true },
-      { Icon: SiPostgresql, name: 'PostgreSQL', tooltip: 'Relational Database Engine', featured: true },
-      { Icon: SiGraphql, name: 'GraphQL', tooltip: 'Flexible Schema Query Layer', featured: true },
-      { Icon: SiRedis, name: 'Redis', tooltip: 'Distributed Caching • Queues', featured: false },
-      { Icon: SiExpress, name: 'Express', tooltip: 'Minimalist API Router', featured: false },
-      { Icon: SiMongodb, name: 'MongoDB', tooltip: 'Document Store Store', featured: false },
-      { Icon: SiPython, name: 'Python', tooltip: 'Data Science & Automation', featured: false },
-      { Icon: SiRust, name: 'Rust', tooltip: 'Systems Speed & Memory Safety', featured: true },
-      { Icon: SiPrisma, name: 'Prisma', tooltip: 'Type-Safe Database ORM Client', featured: false },
-      { Icon: SiTypescript, name: 'TypeScript', tooltip: 'Backend Typings & Contracts', featured: true },
-      { Icon: SiFirebase, name: 'Firebase', tooltip: 'Serverless Real-time Sync', featured: false }
+      { Icon: SiExpress, name: 'Express.js', tooltip: 'Minimalist API Router', featured: true },
+      { Icon: SiMongodb, name: 'MongoDB', tooltip: 'NoSQL Document Store', featured: true },
+      { Icon: SiRedis, name: 'Redis', tooltip: 'High-Performance Cache & Message Broker', featured: false },
+      { Icon: SiRabbitmq, name: 'BullMQ', tooltip: 'Redis-backed Distributed Queue System', featured: false },
+      { Icon: SiSocketdotio, name: 'Socket.IO', tooltip: 'Real-time WebSockets Integration', featured: false },
+      { Icon: SiJsonwebtokens, name: 'JWT', tooltip: 'JSON Web Token Authentication', featured: true },
+      { Icon: SiPytorch, name: 'Ollama', tooltip: 'Local LLM Deployment & APIs', featured: false }
     ]
   },
   {
-    title: 'Infrastructure',
-    description: 'Automating cloud ecosystems. I structure clean CI/CD pipelines, containerized environments, cloud-native orchestration platforms, and repeatable infrastructure-as-code.',
+    title: 'Toolchain',
+    description: 'Automating deployment, hosting, and agentic AI systems. I configure developer pipelines, cloud infrastructure, local LLMs, and edge-hosting architectures.',
     icons: [
-      { Icon: FaAws, name: 'AWS', tooltip: 'EC2 • S3 • RDS Cloud Hosting', featured: true },
-      { Icon: SiGooglecloud, name: 'GCP', tooltip: 'Cloud Computing • BigQuery', featured: false },
-      { Icon: SiDocker, name: 'Docker', tooltip: 'Isolated Container Sandbox', featured: true },
-      { Icon: SiKubernetes, name: 'Kubernetes', tooltip: 'Container Orchestration & Clusters', featured: true },
-      { Icon: SiTerraform, name: 'Terraform', tooltip: 'Declarative Infrastructure-as-Code', featured: true },
-      { Icon: SiServerless, name: 'Serverless', tooltip: 'FaaS & API Lambda Routing', featured: false },
-      { Icon: SiGithubactions, name: 'GitHub Actions', tooltip: 'Automated CI/CD Workflows', featured: true },
       { Icon: SiLinux, name: 'Linux', tooltip: 'POSIX Systems & Bash Scripting', featured: false },
-      { Icon: SiNginx, name: 'Nginx', tooltip: 'Reverse Proxy & Load Balancing', featured: false },
-      { Icon: SiVercel, name: 'Vercel', tooltip: 'Edge Distribution Network', featured: false },
-      { Icon: SiNetlify, name: 'Netlify', tooltip: 'Serverless Web App Hosting', featured: false },
-      { Icon: SiCloudflare, name: 'Cloudflare', tooltip: 'DNS Security & Edge CDN', featured: true }
+      { Icon: SiGit, name: 'Git', tooltip: 'Distributed Version Control', featured: true },
+      { Icon: SiGithub, name: 'GitHub', tooltip: 'Remote Repository Hosting & Collaboration', featured: true },
+      { Icon: SiVercel, name: 'Vercel', tooltip: 'Edge Distribution Network Hosting', featured: true },
+      { Icon: SiSupabase, name: 'Supabase', tooltip: 'Backend-as-a-Service & Postgres Database Platform', featured: true },
+      { Icon: SiPostman, name: 'Postman', tooltip: 'API Testing & Development Tooling', featured: true },
+      { Icon: SiGoogle, name: 'Gemini API', tooltip: 'Google AI Language Models Integration', featured: true },
+      { Icon: SiDeepmind, name: 'Antigravity', tooltip: 'Advanced DeepMind Agentic AI Coding Assistant', featured: true }
     ]
   }
 ];
@@ -73,19 +62,19 @@ const introBackgroundIcons = [
   { Icon: SiTypescript, x: '12%', y: '35%' },
   { Icon: SiGreensock, x: '28%', y: '40%' },
   { Icon: SiNodedotjs, x: '78%', y: '18%' },
-  { Icon: SiGo, x: '90%', y: '25%' },
-  { Icon: SiRust, x: '74%', y: '42%' },
-  { Icon: SiDocker, x: '88%', y: '48%' },
-  { Icon: SiKubernetes, x: '70%', y: '68%' },
-  { Icon: SiTerraform, x: '85%', y: '72%' },
-  { Icon: FaAws, x: '75%', y: '88%' },
-  { Icon: SiCloudflare, x: '90%', y: '88%' },
-  { Icon: SiThreedotjs, x: '48%', y: '15%' },
+  { Icon: SiExpress, x: '90%', y: '25%' },
+  { Icon: SiMongodb, x: '74%', y: '42%' },
+  { Icon: SiLinux, x: '88%', y: '48%' },
+  { Icon: SiGit, x: '70%', y: '68%' },
+  { Icon: SiGithub, x: '85%', y: '72%' },
+  { Icon: SiVercel, x: '75%', y: '88%' },
+  { Icon: SiPostman, x: '90%', y: '88%' },
+  { Icon: SiFramer, x: '48%', y: '15%' },
   { Icon: SiJavascript, x: '52%', y: '48%' },
-  { Icon: SiPython, x: '42%', y: '32%' },
-  { Icon: SiGraphql, x: '58%', y: '28%' },
-  { Icon: SiHtml5, x: '38%', y: '58%' },
-  { Icon: SiNginx, x: '62%', y: '64%' }
+  { Icon: SiGoogle, x: '42%', y: '32%' },
+  { Icon: SiJsonwebtokens, x: '58%', y: '28%' },
+  { Icon: SiRedis, x: '38%', y: '58%' },
+  { Icon: SiDeepmind, x: '62%', y: '64%' }
 ];
 
 const introBackgroundLinks = [
@@ -573,10 +562,16 @@ export default function About() {
                 {cat.description}
               </p>
               
-              {/* Color legend indicator */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginTop: '1.5rem', fontSize: '0.8rem', fontFamily: 'monospace', color: '#ff6b00', opacity: 0.9 }}>
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#ff6b00', display: 'inline-block', boxShadow: '0 0 8px #ff6b00' }}></span>
-                <span style={{ letterSpacing: '0.05em' }}>Orange highlights the technologies I specialize in</span>
+              {/* Color legends indicating Primary vs. Familiar technologies */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '1.5rem', fontSize: '0.8rem', fontFamily: 'monospace' }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#ff6b00', opacity: 0.95 }}>
+                  <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#ff6b00', display: 'inline-block', boxShadow: '0 0 8px #ff6b00' }}></span>
+                  Primary technologies
+                </span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'rgba(255, 255, 255, 0.45)', opacity: 0.95 }}>
+                  <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: 'rgba(255, 255, 255, 0.45)', display: 'inline-block' }}></span>
+                  Familiar technologies
+                </span>
               </div>
             </div>
 

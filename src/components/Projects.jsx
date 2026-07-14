@@ -8,17 +8,10 @@ export default function Projects() {
   const scrollRef = useRef(null);
   const navigate = useNavigate();
   
-  // Passcode states
-  const [showModal, setShowModal] = useState(false);
-  const [passcode, setPasscode] = useState('');
-  const [error, setError] = useState(false);
-  const inputRef = useRef(null);
-
   const projects = [
     { id: '01', title: "Project Kaevrix", desc: "AI-powered structured learning journeys.", protected: false },
     { id: '02', title: "Project Astrix", desc: "AI-native multilingual chat platform.", protected: false },
-    { id: '03', title: "Project Memoriant", desc: "Experimental WebGL interactions.", protected: false },
-    { id: '04', title: "Project Delta", desc: "NDA Restricted Commercial System.", protected: true }
+    { id: '03', title: "Project Memoriant", desc: "Experimental WebGL interactions.", protected: false }
   ];
 
   const sentences = [
@@ -37,12 +30,7 @@ export default function Projects() {
           trigger: containerRef.current,
           pin: true,
           scrub: 2, // Smooth, slow scrub
-          snap: {
-            snapTo: [0, 0.088, 0.177, 0.266, 0.5, 0.667, 0.833, 1.0],
-            duration: 0.8,
-            delay: 0.1,
-            ease: 'power1.inOut'
-          },
+          // Snapping omitted for smooth kinetic horizontal scrolling flow
           start: 'top top',
           end: '+=1500%' // Expanded scroll distance for detailed step-by-step kinetic text
         }
@@ -103,115 +91,9 @@ export default function Projects() {
     return () => ctx.revert();
   }, []);
 
-  // Autofocus the hidden input when modal opens
-  useEffect(() => {
-    if (showModal) {
-      inputRef.current?.focus();
-    }
-  }, [showModal]);
-
   const handleProjectClick = (proj, e) => {
     e.preventDefault();
-    if (proj.protected) {
-      // Check if already unlocked in this session
-      if (sessionStorage.getItem('project_delta_unlocked') === 'true') {
-        // Run shutter transition manually since we bypass global click intercept
-        gsap.set('.transition-panel', { transformOrigin: 'top center' });
-        const tl = gsap.timeline();
-        tl.to('.transition-panel', {
-          scaleY: 1,
-          duration: 0.6,
-          stagger: 0.05,
-          ease: 'power3.inOut'
-        });
-        tl.call(() => {
-          navigate(`/project/${proj.id}`);
-        });
-        tl.call(() => {
-          gsap.set('.transition-panel', { transformOrigin: 'bottom center' });
-        });
-        tl.to('.transition-panel', {
-          scaleY: 0,
-          duration: 0.7,
-          stagger: 0.05,
-          ease: 'power3.inOut',
-          delay: 0.15
-        });
-      } else {
-        setShowModal(true);
-      }
-    } else {
-      // Click intercept handles regular cards automatically
-      // But we call navigate to trigger transitions properly via App.jsx global listener
-      navigate(`/project/${proj.id}`);
-    }
-  };
-
-  const handleInputChange = (e) => {
-    const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 4);
-    setPasscode(value);
-    setError(false);
-
-    if (value.length === 4) {
-      if (value === '2026') {
-        // Correct Passcode -> Trigger Cinematic Transition
-        sessionStorage.setItem('project_delta_unlocked', 'true');
-        
-        const tl = gsap.timeline();
-        
-        // 1. Hide modal container first
-        tl.to('.passcode-panel', {
-          opacity: 0,
-          y: -20,
-          duration: 0.4
-        });
-        
-        // 2. Animate shutter panels closed
-        tl.call(() => {
-          gsap.set('.transition-panel', { transformOrigin: 'top center' });
-        });
-        
-        tl.to('.transition-panel', {
-          scaleY: 1,
-          duration: 0.6,
-          stagger: 0.05,
-          ease: 'power3.inOut'
-        }, '-=0.2');
-        
-        // 3. Swap route under cover
-        tl.call(() => {
-          setShowModal(false);
-          setPasscode('');
-          navigate('/project/04');
-        });
-        
-        // 4. Open shutter panels to reveal Project Delta Case Study
-        tl.call(() => {
-          gsap.set('.transition-panel', { transformOrigin: 'bottom center' });
-        });
-        
-        tl.to('.transition-panel', {
-          scaleY: 0,
-          duration: 0.7,
-          stagger: 0.05,
-          ease: 'power3.inOut',
-          delay: 0.15
-        });
-      } else {
-        // Shake visualizer for failure
-        setError(true);
-        gsap.to('.passcode-dots-container', {
-          x: 10,
-          duration: 0.05,
-          yoyo: true,
-          repeat: 5,
-          onComplete: () => {
-            setPasscode('');
-            setError(false);
-          }
-        });
-      }
-    }
+    navigate(`/project/${proj.id}`);
   };
 
   return (
@@ -320,91 +202,7 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* ==================== PASSCODE VERIFICATION MODAL ==================== */}
-      {showModal && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          backgroundColor: 'rgba(10,10,12,0.92)',
-          backdropFilter: 'blur(15px)',
-          zIndex: 1000,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          color: 'var(--text-primary)'
-        }}>
-          
-          <div className="passcode-panel" style={{ textAlign: 'center', maxWidth: '400px', width: '100%', padding: '2rem' }}>
-            <p style={{ fontSize: '0.8rem', fontFamily: 'monospace', letterSpacing: '0.2em', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '2rem' }}>
-              &#128274; Protected Case Study
-            </p>
-            
-            <h3 className="text-serif" style={{ fontSize: '2rem', margin: '0 0 1rem 0' }}>Enter Passcode</h3>
-            
-            <p style={{ fontSize: '0.9rem', lineHeight: 1.6, color: 'var(--text-secondary)', fontWeight: 300, marginBottom: '3rem' }}>
-              This work is subject to non-disclosure agreements. Enter code <strong style={{ color: 'var(--accent)' }}>2026</strong> to unlock.
-            </p>
-
-            {/* Hidden Input field */}
-            <input 
-              ref={inputRef}
-              type="text" 
-              value={passcode}
-              onChange={handleInputChange}
-              style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }} 
-            />
-
-            {/* Digit Visualizers */}
-            <div className="passcode-dots-container" style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginBottom: '4rem', cursor: 'none' }} onClick={() => inputRef.current?.focus()}>
-              {[...Array(4)].map((_, i) => {
-                const filled = passcode.length > i;
-                return (
-                  <div key={i} style={{
-                    width: '60px',
-                    height: '60px',
-                    border: error ? '1px solid #ff4a4a' : filled ? '1px solid var(--accent)' : '1px solid rgba(255,255,255,0.1)',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: 'rgba(255,255,255,0.02)',
-                    fontSize: '1.5rem',
-                    fontFamily: 'monospace',
-                    fontWeight: 'bold',
-                    transition: 'border-color 0.2s ease'
-                  }}>
-                    {filled ? passcode[i] : '■'}
-                  </div>
-                );
-              })}
-            </div>
-
-            <button 
-              onClick={() => {
-                setShowModal(false);
-                setPasscode('');
-              }} 
-              style={{
-                background: 'none',
-                border: 'none',
-                color: 'var(--text-secondary)',
-                fontSize: '0.8rem',
-                textTransform: 'uppercase',
-                letterSpacing: '0.15em',
-                cursor: 'none',
-                textDecoration: 'underline',
-                textUnderlineOffset: '4px'
-              }}
-              className="hover-target"
-            >
-              Cancel
-            </button>
-          </div>
-
-        </div>
-      )}
+      {/* Passcode modal removed along with Project Delta */}
     </section>
   );
 }
