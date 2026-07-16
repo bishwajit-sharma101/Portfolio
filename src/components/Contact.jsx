@@ -27,7 +27,7 @@ export default function Contact() {
   };
 
   const channels = [
-    { label: 'Email', url: 'mailto:bishwajitsharma444@gmail.com' },
+    { label: 'Email', url: 'https://mail.google.com/mail/?view=cm&fs=1&to=bishwajitsharma444@gmail.com' },
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/bishwajitsharma-in/' },
     { label: 'GitHub', url: 'https://github.com/bishwajit-sharma101' }
   ];

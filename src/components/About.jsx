@@ -19,7 +19,7 @@ const techCategories = [
       { Icon: SiTypescript, name: 'TypeScript', tooltip: 'Type-Safe Scalability', featured: false },
       { Icon: SiJavascript, name: 'JavaScript', tooltip: 'Modern ES6+ Logic Engine', featured: true },
       { Icon: SiTailwindcss, name: 'Tailwind CSS', tooltip: 'Utility-First Styling Design', featured: true },
-      { Icon: SiGreensock, name: 'GSAP', tooltip: 'High-Performance Motion Systems', featured: true },
+      { Icon: SiGreensock, name: 'GSAP', tooltip: 'High-Performance Motion Systems', featured: false },
       { Icon: SiHtml5, name: 'HTML5', tooltip: 'Semantic Web Architecture', featured: false },
       { Icon: SiCss, name: 'CSS3', tooltip: 'Custom Layout Systems • Flex/Grid', featured: false },
       { Icon: SiRedux, name: 'Redux Toolkit', tooltip: 'Global State Management', featured: false },
@@ -42,7 +42,7 @@ const techCategories = [
   },
   {
     title: 'Toolchain',
-    description: 'Automating deployment, hosting, and agentic AI systems. I configure developer pipelines, cloud infrastructure, local LLMs, and edge-hosting architectures.',
+    description: 'Supporting my development workflow through version control, API testing, deployment, and collaboration.',
     icons: [
       { Icon: SiLinux, name: 'Linux', tooltip: 'POSIX Systems & Bash Scripting', featured: false },
       { Icon: SiGit, name: 'Git', tooltip: 'Distributed Version Control', featured: true },
@@ -326,6 +326,46 @@ export default function About() {
 
   return (
     <div ref={sectionRef} style={{ backgroundColor: 'transparent' }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .story-wrapper {
+            align-items: flex-start !important;
+            padding-top: 5vh !important;
+          }
+          .story-container {
+            max-height: 90vh !important;
+            overflow-y: auto !important;
+            padding-bottom: 2rem !important;
+            pointer-events: auto !important;
+          }
+          .story-grid {
+            gap: 2rem !important;
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .story-title {
+            font-size: 2.2rem !important;
+            margin-bottom: 1rem !important;
+          }
+          .story-text {
+            font-size: 0.95rem !important;
+            line-height: 1.5 !important;
+            margin-top: 0.8rem !important;
+          }
+          .story-subtitle {
+            font-size: 1.3rem !important;
+            margin-bottom: 0.5rem !important;
+          }
+          .tech-info-0, .tech-info-1, .tech-info-2 {
+            width: 90vw !important;
+            bottom: 12vh !important;
+          }
+          .tech-intro-text-block {
+            width: 90vw !important;
+            bottom: 10vh !important;
+          }
+        }
+      `}</style>
       
       {/* ==================== FULLSCREEN PINNED CONTAINER ==================== */}
       <section 
@@ -352,40 +392,40 @@ export default function About() {
             willChange: 'transform, opacity'
           }}
         >
-          <div className="container">
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '6rem' }}>
+          <div className="container story-container">
+            <div className="story-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '6rem' }}>
               
               {/* Left: The Story */}
               <div className="about-text-reveal">
                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '2rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)' }}>
                    <span>[01 / PROFILE]</span>
                 </div>
-                <h2 className="text-serif" style={{ fontSize: 'clamp(2.5rem, 5vw, 5rem)', lineHeight: 1.1, margin: '0 0 2rem 0' }}>The Story.</h2>
-                <p style={{ fontSize: '1.15rem', lineHeight: 1.8, color: 'var(--text-secondary)', fontWeight: 300 }}>
-                  I started my engineering journey with a deep curiosity for how complex systems operate under the hood. Over the years, that curiosity evolved into a career building fullstack applications. I believe software should not just be architecturally sound—it should be visually compelling and responsive.
+                <h2 className="text-serif story-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 5rem)', lineHeight: 1.1, margin: '0 0 2rem 0' }}>The Story.</h2>
+                <p className="story-text" style={{ fontSize: '1.15rem', lineHeight: 1.8, color: 'var(--text-secondary)', fontWeight: 300 }}>
+                  My interest in software began when I realized I could build things I wished already existed. One of the first projects that changed my perspective was a simple YouTube downloader—not because it was technically complex, but because it showed me that I wasn't limited to the software available to me. If something felt slow, incomplete, or frustrating to use, I could build a better version myself.
                 </p>
-                <p style={{ fontSize: '1.15rem', lineHeight: 1.8, color: 'var(--text-secondary)', fontWeight: 300, marginTop: '1.5rem' }}>
-                  I focus heavily on performance optimization, bridging backend infrastructure with fluid frontend design systems, and ensuring every line of code serves a product goal.
+                <p className="story-text" style={{ fontSize: '1.15rem', lineHeight: 1.8, color: 'var(--text-secondary)', fontWeight: 300, marginTop: '1.5rem' }}>
+                  Since then, that mindset has shaped every project I work on. I enjoy starting with real problems, building practical solutions, and continuously refining them—making them faster, simpler, and more intuitive with each iteration. For me, software isn't just about writing code; it's about creating products that solve problems the way I believe they should be solved.
                 </p>
               </div>
 
               {/* Right: Interests & Career Goals */}
               <div className="about-text-reveal" style={{ display: 'flex', flexDirection: 'column', gap: '3rem', justifyContent: 'center' }}>
                 <div>
-                  <h3 className="text-serif text-accent" style={{ fontSize: '1.8rem', margin: '0 0 0.75rem 0' }}>Interests</h3>
-                  <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--text-secondary)', fontWeight: 300, margin: 0 }}>
-                    Creative computing, real-time database syncing, motion design systems, open-source developer tooling, and building accessible products that run fast on low-bandwidth networks.
+                  <h3 className="text-serif text-accent story-subtitle" style={{ fontSize: '1.8rem', margin: '0 0 0.75rem 0' }}>Interests</h3>
+                  <p className="story-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--text-secondary)', fontWeight: 300, margin: 0 }}>
+                    Building products that solve real-world problems, AI-powered experiences, real-time systems, product design, and creating software that's intuitive, engaging, and enjoyable to use.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-serif text-accent" style={{ fontSize: '1.8rem', margin: '0 0 0.75rem 0' }}>Career Goals</h3>
-                  <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--text-secondary)', fontWeight: 300, margin: 0 }}>
-                    To lead technical architecture for product-led engineering teams, design highly scalable core infrastructure, and continuously push the visual standards of what web interfaces can achieve.
+                  <h3 className="text-serif text-accent story-subtitle" style={{ fontSize: '1.8rem', margin: '0 0 0.75rem 0' }}>Career Goals</h3>
+                  <p className="story-text" style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'var(--text-secondary)', fontWeight: 300, margin: 0 }}>
+                    To become a product-focused software engineer who builds intuitive, scalable software that meaningfully improves how people learn, communicate, and interact.
                   </p>
                 </div>
               </div>
-   
+
             </div>
           </div>
         </div>
@@ -570,7 +610,7 @@ export default function About() {
                 </span>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'rgba(255, 255, 255, 0.45)', opacity: 0.95 }}>
                   <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: 'rgba(255, 255, 255, 0.45)', display: 'inline-block' }}></span>
-                  Familiar technologies
+                  Technologies I'm actively learning.
                 </span>
               </div>
             </div>

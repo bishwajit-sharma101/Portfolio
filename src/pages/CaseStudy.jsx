@@ -10,8 +10,8 @@ const projectDatabase = {
     title: 'Project Kaevrix',
     description: 'An AI-powered learning platform that organizes scattered educational content into structured, personalized learning journeys.',
     github: 'https://github.com/bishwajit-sharma101/kaevrix',
-    tech: ['React', 'Next.js', 'Go', 'PostgreSQL', 'Docker', 'OpenAI API', 'Tailwind CSS', 'Pathfinder', 'Sanctum', 'Chronos'],
-    problem: `Kaevrix is an AI-powered learning platform designed to solve one of the biggest problems in modern education: people have access to unlimited information but struggle to turn that information into real knowledge. Today, students often jump between YouTube videos, articles, online courses, and notes without a clear direction, leading to confusion, inconsistent learning, and poor retention. Kaevrix addresses this by acting as an intelligent learning system rather than another content platform. Instead of creating educational videos itself, it organizes the world's existing educational content into structured, personalized learning journeys that guide users from beginner to mastery.\n\nThe experience begins with Pathfinder, Kaevrix's AI roadmap generator. Rather than asking users to search for hundreds of tutorials, Pathfinder understands what they want to learn, why they are learning it, how much time they can study each day, and what level of depth they want to achieve. Using this information, it generates a personalized roadmap that breaks a complex subject into manageable milestones. Whether someone wants to become a full-stack developer, prepare for technical interviews, learn mathematics, study history, or master a creative skill, Kaevrix creates a step-by-step progression that removes decision fatigue and gives learners a clear path forward.\n\nUnlike traditional learning platforms that often follow a one-size-fits-all approach, Kaevrix adapts to different learning goals through multiple mastery levels. Someone who only needs practical knowledge can choose a lightweight roadmap focused on the highest-impact concepts, while learners seeking complete expertise can follow a much deeper path that explores advanced topics, edge cases, implementation details, optimization techniques, and real-world applications. The objective is not simply to finish a course but to reach the level of understanding that matches the learner's personal goal.\n\nOnce a roadmap has been generated, learning takes place inside a distraction-free environment called Sanctum. Here, learners study using carefully selected educational videos while having access to AI-generated notes, summaries, study guides, focus tools, and other resources that help them stay engaged. However, Kaevrix does not consider watching a video as proof of learning. After every lesson, artificial intelligence generates quizzes and active recall exercises based specifically on the material that was just studied. This ensures that users retrieve information from memory rather than merely recognizing concepts, significantly improving long-term retention and understanding.\n\nAs learners continue progressing, Kaevrix continuously tracks their development through Chronos, an intelligent progress engine that analyzes consistency, learning speed, estimated completion dates, and overall mastery. Instead of simply displaying percentages, Chronos helps learners understand whether they are ahead or behind schedule and suggests realistic adjustments to their daily study routine. Every completed topic contributes to a visual skill tree, allowing users to see their knowledge expand over time instead of simply collecting certificates. Progress is represented through demonstrated understanding, completed milestones, and mastery of interconnected concepts rather than hours spent watching content.\n\nKaevrix also incorporates carefully designed game mechanics that encourage consistency without distracting from education. Learners earn experience points by completing meaningful activities such as quizzes, reviews, and roadmap milestones instead of passively consuming videos. Future social features, including collaborative study spaces and multiplayer learning experiences, aim to make education less isolating by allowing learners to motivate one another through shared challenges and cooperative learning rather than competition alone.\n\nUltimately, Kaevrix is built around the belief that learning should be an active process instead of passive content consumption. Its goal is to become an intelligent operating system for learning—one that helps people discover what to study, guides them through a structured path, verifies that they truly understand each concept, tracks their progress over time, and transforms scattered educational resources into a single, personalized journey toward genuine mastery. Instead of measuring success by how much content a learner has watched, Kaevrix measures success by how much knowledge they have actually retained and can confidently apply.`,
+    tech: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'Redis', 'BullMQ', 'Socket.IO', 'Gemini API', 'YouTube IFrame API', 'JWT Authentication', 'Autocannon'],
+    problem: 'Modern online learners are overwhelmed by unlimited, fragmented information but lack a structured path to turn it into actual knowledge. Navigating across disjointed tutorials, videos, and articles leads to severe decision fatigue, passive content consumption, and poor long-term retention. Developers and students need an intelligent learning operating system that dynamically organizes uncurated content into personalized roadmaps, distraction-free study environments, and active recall memory retrieval loops.',
     features: [
       'Pathfinder AI Roadmap Generator: Generates personalized step-by-step progressions based on what users want to learn, why they are learning it, their daily study budget, and target depth.',
       'Sanctum Study Environment: A distraction-free dashboard combining selected educational videos with AI notes, summaries, focus tools, and interactive recall quizzes.',
@@ -27,7 +27,7 @@ const projectDatabase = {
     description: 'An AI-native messaging platform designed to facilitate fluid, context-aware multilingual communication.',
     github: 'https://github.com/bishwajit-sharma101/astrix',
     tech: ['React', 'TypeScript', 'Node.js', 'Express', 'MongoDB', 'WebSockets', 'OpenAI API', 'GSAP', 'Tailwind CSS'],
-    problem: `Traditional translators process messages one sentence at a time, often losing context, tone, and intent, which can result in awkward or inaccurate translations. AstrixChat approaches translation differently by understanding the conversation as a whole. Instead of translating isolated messages, it continuously analyzes the surrounding context, previous exchanges, the relationship between participants, and the flow of the discussion to produce translations that better preserve meaning, emotion, and nuance. This contextual understanding allows the platform to distinguish between slang, idioms, sarcasm, technical terminology, and words with multiple meanings, generating translations that are significantly more natural than conventional machine translation.\n\nBeyond text translation, AstrixChat is designed to support seamless multilingual communication through text, voice, and AI-assisted messaging. Users can communicate in their native language while the platform automatically delivers messages in the recipient's preferred language, eliminating the need to manually translate or switch between external tools. AI also helps refine incomplete sentences, correct grammatical mistakes without altering intent, and ensure messages remain clear and easy to understand before they are delivered. By combining context-aware translation with intelligent language assistance, AstrixChat transforms multilingual conversations from a series of translated messages into a single, fluid dialogue where language becomes virtually invisible, allowing people to focus on the conversation rather than the act of translation itself. Alongside every conversation, AstrixChat includes an integrated AI sidebar that acts as a real-time conversational assistant rather than a separate chatbot. Instead of requiring users to copy and paste messages into another AI application, the assistant has contextual awareness of the current chat—with appropriate user permissions—and can help users understand, navigate, and interact with their conversations more effectively. Users can ask questions such as "What did we decide yesterday?", "Summarize the discussion", "What are the action items?", or "When did they mention the meeting?", and the AI instantly analyzes the conversation to provide accurate, context-aware responses.\n\nThe assistant can also explain messages, clarify misunderstandings, translate specific parts of the conversation, rewrite replies in different tones, generate response suggestions, and answer questions based on the information already shared in the chat. Because it understands the full conversational context rather than individual messages in isolation, it can resolve references, identify who said what, recognize ongoing topics, and provide answers that remain consistent with the discussion. Whether users need a quick summary of hundreds of messages, want to recall an important detail, or need help composing a thoughtful response, the AI sidebar transforms every conversation into an intelligent, searchable knowledge space while keeping the experience seamless and integrated within the chat itself.`,
+    problem: 'Traditional translation systems translate text sentence-by-sentence in isolation. This mechanical method completely loses conversational context, tone, slang, and cultural nuances, resulting in awkward phrasing. Multi-party conversations in separate languages quickly become disjointed and unnatural, highlighting the need for a chat engine that processes multi-turn dialogue holistically and integrates seamless context-aware translation.',
     features: [
       'Context-Aware Multilingual Messaging: Processes discussions as a whole to deliver translations that preserve emotional intent, sarcasm, and technical terminology.',
       'Text, Voice, and AI-Assisted Language Refinements: Refines incomplete sentences, corrects grammar mistakes, and formats tone without altering original intent before delivery.',
@@ -39,17 +39,20 @@ const projectDatabase = {
   },
   '03': {
     title: 'Project Memoriant',
-    description: 'An experimental web interface analyzing distributed microservice architectures.',
+    description: 'A collaborative bookmark and resource management engine built to curate, organize, and securely share knowledge bases across the web.',
     github: 'https://github.com/bishwajit-sharma101/memoriant',
-    tech: ['Go', 'gRPC', 'GraphQL', 'AWS ECS', 'Terraform', 'Docker', 'Kubernetes', 'Jaeger Tracing', 'Envoy Proxy', 'Prometheus', 'Redis', 'GitHub Actions'],
-    problem: 'Microservice tracking tools are often complex and hard to scan. Developers needed a clear, typographic-driven structural explorer that maps server endpoints and health metrics in real-time.',
+    live: 'https://memoriant.vercel.app/',
+    tech: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'PostgreSQL', 'Vercel'],
+    problem: 'Online readers and developers lose valuable articles, documentation, and code repositories in cluttered, unsynchronized browser bookmarks. Traditional bookmark tools lack granular privacy toggles, shareable public curation pages, and robust database-level security policies, creating isolated knowledge silos instead of open, structured resource libraries.',
     features: [
-      'Real-time dependency graphs mapping gRPC traffic.',
-      'GraphQL gateway aggregating metrics from five distinct mock services.',
-      'Automated cloud deployment setup using infrastructure-as-code.'
+      'Private Vault Dashboard: A protected personal workspace to save bookmarks, add metadata, assign tags, and configure granular privacy toggles.',
+      'Public Curator Profiles: Dynamic public curation feeds mapped to unique user handles, enabling developers, designers, and students to share resource sets.',
+      'Supabase Secure Identity: Full secure user authentication pipelines featuring email verification, session persistence, and protected routing layers.',
+      'Row Level Security (RLS): Strict database-level isolation policies enforcing tenant separation at the query layer rather than the application layer.',
+      'Safe Input Sanitization: Multi-tier URL verification, protocol validation, and input sanitization to block malicious links and system exploits.'
     ],
-    challenges: 'Setting up real-time telemetry pipelines across dockerized environments introduced significant processing overhead and metric delays.',
-    learnings: 'I learned to design lightweight, non-blocking telemetry agents in Go, decreasing instrumentation overhead to less than 1.5% CPU utilization.'
+    challenges: 'Resolving dashboard data isolation leak bugs by implementing strict row-level security (RLS) schemas in PostgreSQL, refining PostgREST response code exceptions (406 vs 409) for concurrent sign-up collisions, and debugging responsive layout overflows caused by complex 3D CSS components.',
+    learnings: 'I mastered database-level security policy engineering using Supabase RLS and custom PostgreSQL schemas, and learned to write automated test runners for user handle uniqueness and cross-tenant data leakage validations.'
   }
 };
 
@@ -99,6 +102,15 @@ export default function CaseStudy() {
 
   return (
     <div ref={containerRef} style={{ position: 'relative', minHeight: '100vh', paddingTop: '12vh', paddingBottom: '15vh', backgroundColor: 'transparent', zIndex: 10 }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .case-slide {
+            max-height: 85vh !important;
+            overflow-y: auto !important;
+            padding: 2rem 1rem !important;
+          }
+        }
+      `}</style>
       
       {/* Top Controls */}
       <div className="case-hero-reveal" style={{ padding: '0 5vw', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '2rem', marginBottom: '6rem' }}>
@@ -118,8 +130,13 @@ export default function CaseStudy() {
         </p>
       </div>
 
-      {/* ==================== 2. GITHUB LINK ==================== */}
-      <div className="case-hero-reveal" style={{ width: '90vw', maxWidth: '1800px', margin: '0 auto 1.5rem auto', display: 'flex', justifyContent: 'flex-end' }}>
+      {/* ==================== 2. PROJECT LINKS ==================== */}
+      <div className="case-hero-reveal" style={{ width: '90vw', maxWidth: '1800px', margin: '0 auto 1.5rem auto', display: 'flex', justifyContent: 'flex-end', gap: '2rem' }}>
+        {project.live && (
+          <a href={project.live} target="_blank" rel="noopener noreferrer" className="hover-target animate-link" style={{ color: '#ff6b35', textDecoration: 'none', borderBottom: '1px solid #ff6b35', paddingBottom: '0.25rem', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+            Live Demo &rarr;
+          </a>
+        )}
         <a href={project.github} target="_blank" rel="noopener noreferrer" className="hover-target" style={{ color: 'var(--text-primary)', textDecoration: 'none', borderBottom: '1px solid var(--text-primary)', paddingBottom: '0.25rem', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.15em' }}>
           GitHub Repository &rarr;
         </a>
@@ -216,7 +233,7 @@ export default function CaseStudy() {
       </div>
 
       {/* ==================== 3. TECH STACK MARQUEE ==================== */}
-      <div style={{ width: '90vw', maxWidth: '1800px', margin: '0 auto 8rem auto' }}>
+      <div style={{ width: '90vw', maxWidth: '1800px', margin: '0 auto 6rem auto' }}>
         <div className="case-hero-reveal" style={{ borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', padding: '2rem 0', overflow: 'hidden' }}>
           <span style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)', marginBottom: '1.5rem', paddingLeft: '5vw' }}>Tech Stack</span>
           
@@ -243,85 +260,111 @@ export default function CaseStudy() {
         </div>
       </div>
 
-      {/* ==================== 4. ASYMMETRICAL EDITORIAL SECTIONS ==================== */}
-      <div style={{ width: '90vw', maxWidth: '1800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '8rem' }}>
+      {/* ==================== 4. ASYMMETRICAL EDITORIAL GRID (Recruiter-Scanner Layout) ==================== */}
+      <div style={{ width: '90vw', maxWidth: '1800px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '5rem' }}>
         
-        {/* The Problem */}
-        <div className="case-section" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', position: 'relative', paddingTop: '4rem' }}>
-          <div className="section-line" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '1px', backgroundColor: 'rgba(255,255,255,0.05)', transformOrigin: 'left center' }}></div>
-          
-          {/* Left Column: Marker & Heading */}
-          <div className="section-header-block">
-            <span style={{ display: 'block', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>[01 / CONTEXT]</span>
-            <h2 className="text-serif" style={{ fontSize: 'clamp(2rem, 3.5vw, 3.5rem)', margin: 0, color: 'var(--text-primary)', textTransform: 'uppercase' }}>The Problem</h2>
-          </div>
-          
-          {/* Right Column: Paragraph */}
-          <div className="section-content-block" style={{ maxWidth: '650px' }}>
-            {project.problem.split('\n\n').map((paragraph, idx) => (
-              <p key={idx} style={{ fontSize: '1.15rem', lineHeight: 1.8, color: 'rgba(255,255,255,0.7)', fontWeight: 300, margin: '0 0 1.5rem 0' }}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </div>
-
-        {/* Features */}
-        <div className="case-section" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', position: 'relative', paddingTop: '4rem' }}>
-          <div className="section-line" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '1px', backgroundColor: 'rgba(255,255,255,0.05)', transformOrigin: 'left center' }}></div>
-          
-          {/* Left Column: Marker & Heading */}
-          <div className="section-header-block">
-            <span style={{ display: 'block', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>[02 / EXECUTION]</span>
-            <h2 className="text-serif" style={{ fontSize: 'clamp(2rem, 3.5vw, 3.5rem)', margin: 0, color: 'var(--text-primary)', textTransform: 'uppercase' }}>Key Features</h2>
-          </div>
-          
-          {/* Right Column: List */}
-          <div className="section-content-block" style={{ maxWidth: '650px' }}>
-            <ul style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', paddingLeft: '1.5rem', color: 'rgba(255,255,255,0.7)', fontSize: '1.15rem', lineHeight: 1.6, fontWeight: 300, margin: 0 }}>
-              {project.features.map((feature, index) => (
-                <li key={index} style={{ paddingLeft: '0.5rem' }}>{feature}</li>
+        {/* Left Column: Context & Challenges */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '5rem' }}>
+          {/* The Problem */}
+          <div className="case-section" style={{ position: 'relative', paddingTop: '3rem' }}>
+            <div className="section-line" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '1px', background: 'linear-gradient(90deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%)', transformOrigin: 'left center' }}></div>
+            <div className="section-header-block" style={{ marginBottom: '2rem' }}>
+              <span style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>[01 / CONTEXT]</span>
+              <h2 className="text-serif" style={{ fontSize: 'clamp(1.8rem, 2.5vw, 2.5rem)', margin: 0, color: 'var(--text-primary)', textTransform: 'uppercase' }}>The Problem</h2>
+            </div>
+            <div className="section-content-block">
+              {project.problem.split('\n\n').map((paragraph, idx) => (
+                <p 
+                  key={idx} 
+                  style={{ 
+                    fontSize: idx === 0 ? '1.25rem' : '1.1rem', 
+                    lineHeight: idx === 0 ? 1.7 : 1.8, 
+                    color: idx === 0 ? 'var(--text-primary)' : 'rgba(255,255,255,0.6)', 
+                    fontWeight: idx === 0 ? 400 : 300, 
+                    margin: '0 0 1.5rem 0' 
+                  }}
+                >
+                  {paragraph}
+                </p>
               ))}
-            </ul>
+            </div>
+          </div>
+
+          {/* Challenges */}
+          <div className="case-section" style={{ position: 'relative', paddingTop: '3rem' }}>
+            <div className="section-line" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '1px', background: 'linear-gradient(90deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%)', transformOrigin: 'left center' }}></div>
+            <div className="section-header-block" style={{ marginBottom: '2rem' }}>
+              <span style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>[03 / RESOLUTION]</span>
+              <h2 className="text-serif" style={{ fontSize: 'clamp(1.8rem, 2.5vw, 2.5rem)', margin: 0, color: 'var(--text-primary)', textTransform: 'uppercase' }}>Challenges</h2>
+            </div>
+            <div className="section-content-block">
+              <div style={{
+                position: 'relative',
+                padding: '2.5rem',
+                backgroundColor: 'rgba(255, 107, 53, 0.015)',
+                border: '1px solid rgba(255, 107, 53, 0.08)',
+                borderLeft: '4px solid #ff6b35'
+              }}>
+                <div style={{ position: 'absolute', top: -4, right: -4, color: 'rgba(255, 107, 53, 0.3)', fontFamily: 'monospace', fontSize: '0.65rem' }}>+</div>
+                <div style={{ position: 'absolute', bottom: -6, right: -4, color: 'rgba(255, 107, 53, 0.3)', fontFamily: 'monospace', fontSize: '0.65rem' }}>+</div>
+                <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'rgba(255,255,255,0.75)', fontWeight: 300, margin: 0 }}>
+                  {project.challenges}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Challenges */}
-        <div className="case-section" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', position: 'relative', paddingTop: '4rem' }}>
-          <div className="section-line" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '1px', backgroundColor: 'rgba(255,255,255,0.05)', transformOrigin: 'left center' }}></div>
-          
-          {/* Left Column: Marker & Heading */}
-          <div className="section-header-block">
-            <span style={{ display: 'block', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>[03 / RESOLUTION]</span>
-            <h2 className="text-serif" style={{ fontSize: 'clamp(2rem, 3.5vw, 3.5rem)', margin: 0, color: 'var(--text-primary)', textTransform: 'uppercase' }}>Challenges</h2>
+        {/* Right Column: Execution & Summary */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '5rem' }}>
+          {/* Key Features */}
+          <div className="case-section" style={{ position: 'relative', paddingTop: '3rem' }}>
+            <div className="section-line" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '1px', background: 'linear-gradient(90deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%)', transformOrigin: 'left center' }}></div>
+            <div className="section-header-block" style={{ marginBottom: '2rem' }}>
+              <span style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>[02 / EXECUTION]</span>
+              <h2 className="text-serif" style={{ fontSize: 'clamp(1.8rem, 2.5vw, 2.5rem)', margin: 0, color: 'var(--text-primary)', textTransform: 'uppercase' }}>Key Features</h2>
+            </div>
+            <div className="section-content-block" style={{ display: 'flex', flexDirection: 'column', gap: '1.8rem' }}>
+              {project.features.map((feature, index) => {
+                const parts = feature.split(': ');
+                const title = parts[0];
+                const desc = parts[1] || '';
+                return (
+                  <div key={index} className="feature-card hover-target" style={{ borderLeft: '2px solid #ff6b35', paddingLeft: '1.5rem', position: 'relative' }}>
+                    <span style={{ fontSize: '0.7rem', fontFamily: 'monospace', color: 'var(--text-secondary)', display: 'block', marginBottom: '0.3rem', letterSpacing: '0.1em' }}>[ FEATURE 0{index + 1} ]</span>
+                    <h4 className="text-serif" style={{ fontSize: '1.25rem', margin: '0 0 0.5rem 0', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.01em' }}>{title}</h4>
+                    <p style={{ fontSize: '1.05rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.55)', fontWeight: 300, margin: 0 }}>{desc}</p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          
-          {/* Right Column: Paragraph */}
-          <div className="section-content-block" style={{ maxWidth: '650px' }}>
-            <p style={{ fontSize: '1.15rem', lineHeight: 1.8, color: 'rgba(255,255,255,0.7)', fontWeight: 300, margin: 0 }}>
-              {project.challenges}
-            </p>
+
+          {/* Learnings */}
+          <div className="case-section" style={{ position: 'relative', paddingTop: '3rem' }}>
+            <div className="section-line" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '1px', background: 'linear-gradient(90deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%)', transformOrigin: 'left center' }}></div>
+            <div className="section-header-block" style={{ marginBottom: '2rem' }}>
+              <span style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>[04 / SUMMARY]</span>
+              <h2 className="text-serif" style={{ fontSize: 'clamp(1.8rem, 2.5vw, 2.5rem)', margin: 0, color: 'var(--text-primary)', textTransform: 'uppercase' }}>Learnings</h2>
+            </div>
+            <div className="section-content-block">
+              <div style={{
+                position: 'relative',
+                padding: '2.5rem',
+                backgroundColor: 'rgba(255, 255, 255, 0.01)',
+                border: '1px solid rgba(255, 255, 255, 0.04)',
+                borderLeft: '4px solid var(--text-primary)'
+              }}>
+                <div style={{ position: 'absolute', top: -4, right: -4, color: 'rgba(255, 255, 255, 0.15)', fontFamily: 'monospace', fontSize: '0.65rem' }}>+</div>
+                <div style={{ position: 'absolute', bottom: -6, right: -4, color: 'rgba(255, 255, 255, 0.15)', fontFamily: 'monospace', fontSize: '0.65rem' }}>+</div>
+                <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'rgba(255,255,255,0.75)', fontWeight: 300, margin: 0 }}>
+                  {project.learnings}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Learnings */}
-        <div className="case-section" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', position: 'relative', paddingTop: '4rem' }}>
-          <div className="section-line" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '1px', backgroundColor: 'rgba(255,255,255,0.05)', transformOrigin: 'left center' }}></div>
-          
-          {/* Left Column: Marker & Heading */}
-          <div className="section-header-block">
-            <span style={{ display: 'block', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>[04 / SUMMARY]</span>
-            <h2 className="text-serif" style={{ fontSize: 'clamp(2rem, 3.5vw, 3.5rem)', margin: 0, color: 'var(--text-primary)', textTransform: 'uppercase' }}>Learnings</h2>
-          </div>
-          
-          {/* Right Column: Paragraph */}
-          <div className="section-content-block" style={{ maxWidth: '650px' }}>
-            <p style={{ fontSize: '1.15rem', lineHeight: 1.8, color: 'rgba(255,255,255,0.7)', fontWeight: 300, margin: 0 }}>
-              {project.learnings}
-            </p>
-          </div>
-        </div>
-
+        
       </div>
 
     </div>

@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from 'react';
 const projectDetails = {
   '01': { text: "INTELLIGENT LEARNING PATHS • STRUCTURED KNOWLEDGE • KAEVRIX • ", color: "#ff944d", bgColor: "#1f0c00" },
   '02': { text: "CONTEXT-AWARE MULTILINGUAL CHAT • FLUID DIALOGUE • ASTRIX • ", color: "#66a3ff", bgColor: "#000f26" },
-  '03': { text: "DISTRIBUTED TELEMETRY • MICROSERVICE MAPPING • MEMORIANT • ", color: "#ff4d88", bgColor: "#26000d" }
+  '03': { text: "RESOURCE VAULT • SECURE KNOWLEDGE MANAGEMENT • MEMORIANT • ", color: "#ff4d88", bgColor: "#26000d" }
 };
 
 export default function PremiumProjectCard({ proj }) {

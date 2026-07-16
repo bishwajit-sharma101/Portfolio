@@ -106,10 +106,69 @@ export default function Hero() {
         ease: 'sine.inOut'
       });
 
+      // Pulse the key smash hint wtf indicator
+      gsap.to('.key-hint', {
+        opacity: 0.8,
+        duration: 0.8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+
+      // Spawn funny arcade popup words on key press
+      const spawnFunnyText = () => {
+        const words = ['WTF!', 'BRRR!', 'OOF!', 'HACKED!', 'YEET!', 'BOOM!', 'ZAP!', 'BZZT!', 'BAM!', 'CLICK!', 'OOMPH!', 'HACK!', 'LOL!'];
+        const randomWord = words[Math.floor(Math.random() * words.length)];
+        
+        const el = document.createElement('div');
+        el.textContent = randomWord;
+        el.style.position = 'fixed';
+        
+        // Position safely above the "BISHWAJIT" name block (top 8vh to 23vh)
+        const rx = 20 + Math.random() * 60;
+        const ry = 8 + Math.random() * 15;
+        
+        el.style.left = `${rx}vw`;
+        el.style.top = `${ry}vh`;
+        el.style.transform = 'translate(-50%, -50%)'; // Center aligning
+        el.style.color = '#ff6b35';
+        el.style.fontFamily = 'monospace';
+        el.style.fontSize = 'clamp(2.5rem, 5vw, 4.5rem)'; // Huge, punchy arcade style text
+        el.style.fontWeight = '900';
+        el.style.letterSpacing = '0.05em';
+        el.style.zIndex = '9999';
+        el.style.pointerEvents = 'none';
+        el.style.textShadow = '0 0 15px rgba(255, 107, 53, 0.6)';
+        
+        document.body.appendChild(el);
+        
+        gsap.fromTo(el,
+          { scale: 0.5, rotation: -25 + Math.random() * 50, opacity: 0 },
+          { 
+            scale: 1.3, 
+            y: -100, 
+            opacity: 1, 
+            duration: 0.65, 
+            ease: 'back.out(2.2)',
+            onComplete: () => {
+              gsap.to(el, {
+                opacity: 0,
+                y: -150,
+                duration: 0.25,
+                onComplete: () => el.remove()
+              });
+            }
+          }
+        );
+      };
+
       // 7. Keydown letter cascade wave
       const handleKeyDown = (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
         
+        // Spawn arcade popup
+        spawnFunnyText();
+
         const nameChars = gsap.utils.toArray('.name-char');
         gsap.timeline()
           .to(nameChars, {
@@ -188,45 +247,72 @@ export default function Hero() {
   return (
     <section ref={containerRef} className="hero-section" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', position: 'relative', backgroundColor: 'transparent' }}>
       
+      <style>{`
+        @media (max-width: 768px) {
+          .floating-tag-outer {
+            position: static !important;
+            margin: 0.5rem 0.8rem !important;
+          }
+          .floating-tags-container {
+            position: absolute !important;
+            top: 10vh !important;
+            left: 0 !important;
+            width: 100vw !important;
+            display: flex !important;
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+            align-items: center !important;
+          }
+          .hero-meta {
+            display: none !important;
+          }
+          .hero-title-word {
+            font-size: clamp(2.2rem, 12vw, 5rem) !important;
+          }
+        }
+      `}</style>
+
       {/* ==================== CENTERED HORIZONTAL TAGS ROW (Positioned above the name) ==================== */}
-      {floatingTags.map((tag, i) => (
-        <div 
-          key={i} 
-          className="floating-tag-outer" 
-          onMouseEnter={handleTagEnter}
-          onMouseLeave={handleTagLeave}
-          style={{ 
-            position: 'absolute', 
-            top: '20vh', // High enough to avoid name letters entirely
-            left: tag.left || 'auto',
-            right: tag.right || 'auto',
-            zIndex: 5
-          }}
-        >
+      <div className="floating-tags-container">
+        {floatingTags.map((tag, i) => (
           <div 
-            className="floating-tag-inner" 
-            style={{
-              fontFamily: 'monospace',
-              fontSize: 'clamp(0.75rem, 1.2vw, 0.9rem)',
-              letterSpacing: '0.2em',
-              color: 'var(--text-primary)', // Crisp white
-              display: 'flex',
-              alignItems: 'center',
-              whiteSpace: 'nowrap',
-              willChange: 'transform, opacity'
+            key={i} 
+            className="floating-tag-outer" 
+            onMouseEnter={handleTagEnter}
+            onMouseLeave={handleTagLeave}
+            style={{ 
+              position: 'absolute', 
+              top: '10vh', // Elevated near top of the viewport to prevent letter collisions
+              left: tag.left || 'auto',
+              right: tag.right || 'auto',
+              zIndex: 5
             }}
           >
-            {/* Minimal orange accent dot instead of boxes */}
-            <span style={{ color: '#ff6b35', marginRight: '0.6rem', fontSize: '1.2rem', lineHeight: 1 }}>•</span>
-            {tag.label}
+            <div 
+              className="floating-tag-inner" 
+              style={{
+                fontFamily: 'monospace',
+                fontSize: 'clamp(0.75rem, 1.2vw, 0.9rem)',
+                letterSpacing: '0.2em',
+                color: 'var(--text-primary)', // Crisp white
+                display: 'flex',
+                alignItems: 'center',
+                whiteSpace: 'nowrap',
+                willChange: 'transform, opacity'
+              }}
+            >
+              {/* Minimal orange accent dot instead of boxes */}
+              <span style={{ color: '#ff6b35', marginRight: '0.6rem', fontSize: '1.2rem', lineHeight: 1 }}>•</span>
+              {tag.label}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
       {/* Massive Kinetic Typography */}
       <div style={{ textAlign: 'center', zIndex: 6 }}>
         <div className="hero-word-container" style={{ overflow: 'hidden', display: 'block', paddingTop: '0.4em', marginTop: '-0.4em', paddingBottom: '0.8em', marginBottom: '-0.8em' }}>
-          <h1 ref={textRef1} className="text-serif hero-word hover-target" style={{ fontSize: 'clamp(4rem, 16vw, 18rem)', lineHeight: 0.8, margin: 0, textTransform: 'uppercase', color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>
+          <h1 ref={textRef1} className="text-serif hero-word hero-title-word hover-target" style={{ fontSize: 'clamp(4rem, 16vw, 18rem)', lineHeight: 0.8, margin: 0, textTransform: 'uppercase', color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>
             {"BISHWAJIT".split('').map((char, index) => (
               <span 
                 key={index} 
@@ -241,7 +327,7 @@ export default function Hero() {
           </h1>
         </div>
         <div className="hero-word-container" style={{ overflow: 'hidden', display: 'block', marginTop: 'calc(-2vw - 0.4em)', paddingTop: '0.4em', paddingBottom: '0.8em', marginBottom: '-0.8em' }}>
-          <h1 ref={textRef2} className="text-serif hero-word hover-target" style={{ fontSize: 'clamp(4rem, 16vw, 18rem)', lineHeight: 0.8, margin: 0, textTransform: 'uppercase', color: 'var(--text-primary)', whiteSpace: 'nowrap', marginLeft: '10vw' }}>
+          <h1 ref={textRef2} className="text-serif hero-word hero-title-word hover-target" style={{ fontSize: 'clamp(4rem, 16vw, 18rem)', lineHeight: 0.8, margin: 0, textTransform: 'uppercase', color: 'var(--text-primary)', whiteSpace: 'nowrap', marginLeft: '10vw' }}>
             {"SHARMA".split('').map((char, index) => (
               <span 
                 key={index} 
@@ -270,6 +356,11 @@ export default function Hero() {
               .
             </span>
           </h1>
+        </div>
+        
+        {/* Funny Keyboard smash hint indicator */}
+        <div className="key-hint" style={{ marginTop: '2.5rem', fontFamily: 'monospace', fontSize: '0.75rem', letterSpacing: '0.2em', color: '#ff6b35', opacity: 0.5, textTransform: 'uppercase' }}>
+          [ PRESS ANY KEY TO INTERACT ]
         </div>
       </div>
 

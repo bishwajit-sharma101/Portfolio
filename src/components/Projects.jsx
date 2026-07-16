@@ -11,7 +11,7 @@ export default function Projects() {
   const projects = [
     { id: '01', title: "Project Kaevrix", desc: "AI-powered structured learning journeys.", protected: false },
     { id: '02', title: "Project Astrix", desc: "AI-native multilingual chat platform.", protected: false },
-    { id: '03', title: "Project Memoriant", desc: "Experimental WebGL interactions.", protected: false }
+    { id: '03', title: "Project Memoriant", desc: "Collaborative secure bookmark and resource vault.", protected: false }
   ];
 
   const sentences = [

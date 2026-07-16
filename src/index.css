@@ -575,3 +575,13 @@ html {
     stroke-dashoffset: 0;
   }
 }
+
+/* Hide custom cursor and restore standard cursor on mobile/touch screens */
+@media (max-width: 768px) {
+  .custom-cursor {
+    display: none !important;
+  }
+  body, a, button, [style*="cursor"] {
+    cursor: auto !important;
+  }
+}
