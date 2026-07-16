@@ -103,7 +103,17 @@ const introBackgroundLinks = [
   { from: 10, to: 11 }
 ];
 
+const mobileIntroPos = [
+  { x: '15%', y: '10%' }, { x: '50%', y: '8%' },  { x: '85%', y: '15%' },
+  { x: '25%', y: '22%' }, { x: '75%', y: '25%' }, { x: '55%', y: '30%' },
+  { x: '10%', y: '38%' }, { x: '45%', y: '42%' }, { x: '85%', y: '40%' },
+  { x: '65%', y: '52%' }, { x: '20%', y: '55%' }, { x: '80%', y: '60%' },
+  { x: '45%', y: '65%' }, { x: '15%', y: '72%' }, { x: '60%', y: '75%' },
+  { x: '85%', y: '80%' }, { x: '30%', y: '82%' }, { x: '50%', y: '88%' }
+];
+
 export default function About() {
+  const isMobileView = window.innerWidth <= 768;
   const sectionRef = useRef(null);
   const capSectionRef = useRef(null);
 
@@ -202,21 +212,23 @@ export default function About() {
         }
       });
 
+      const vw = window.innerWidth / 100;
+      const vh = window.innerHeight / 100;
       const isMobile = window.innerWidth < 768;
       const excludeWidth = isMobile ? 90 : 45; // vw exclusion for text block
       const excludeHeight = isMobile ? 50 : 55; // vh exclusion for text block
 
       // --- PHASE 0: STORY EXIT & INTRO ENTER ---
       mainTl.to('.story-wrapper', {
-        y: '-80vh',
+        y: -80 * vh,
         opacity: 0,
         duration: 0.55,
         ease: 'power3.in'
       }, 0);
 
       // Set initial hidden state for intro block elements to enter cleanly
-      gsap.set('.tech-intro-text-block', { opacity: 0, y: '80vh' });
-      gsap.set('.intro-constellation-outer', { opacity: 0, y: '80vh' });
+      gsap.set('.tech-intro-text-block', { opacity: 0, y: 80 * vh });
+      gsap.set('.intro-constellation-outer', { opacity: 0, y: 80 * vh });
 
       mainTl.to('.intro-constellation-outer', {
         opacity: 1,
@@ -234,7 +246,7 @@ export default function About() {
 
       // --- PHASE 1: INTRO EXIT & FRONTEND ENTER ---
       mainTl.to('.tech-intro-wrapper', {
-        y: '-80vh',
+        y: -80 * vh,
         opacity: 0,
         duration: 0.55,
         ease: 'power3.in'
@@ -264,21 +276,33 @@ export default function About() {
           { x: 50, y: 75 }, { x: 70, y: 82 }, { x: 92, y: 72 }, { x: 60, y: 60 } // avoiding bottom-left
         ];
         
-        const mobilePositions = [
-          { x: 10, y: 5 }, { x: 40, y: 8 }, { x: 70, y: 5 }, { x: 90, y: 12 },
-          { x: 20, y: 25 }, { x: 55, y: 22 }, { x: 85, y: 28 }, { x: 15, y: 45 },
-          { x: 45, y: 40 }, { x: 75, y: 45 }, { x: 30, y: 58 }, { x: 65, y: 55 } // top 60% of screen only
-        ];
-
-        const positions = isMobile ? mobilePositions : desktopPositions;
-
         cat.icons.forEach(({ Icon, featured }, i) => {
           const iconEl = `.tech-icon-${index}-${i}`;
           
-          const pos = positions[i % positions.length];
-          // Add a tiny bit of random jitter so it doesn't look completely rigid, but keep it small to prevent overlaps
-          const scatteredX = `${pos.x + (Math.random() * 3 - 1.5)}vw`;
-          const scatteredY = `${pos.y + (Math.random() * 3 - 1.5)}vh`;
+          let pos;
+          if (isMobile) {
+            const count = cat.icons.length;
+            const yBase = 14 + (i / (count - 1)) * 52;
+            const yJitter = Math.sin(i * 1.7) * 3;
+            const yVal = yBase + yJitter;
+
+            const colType = i % 3;
+            let xVal;
+            if (colType === 0) {
+              xVal = 14 + Math.cos(i * 2.3) * 4;
+            } else if (colType === 1) {
+              xVal = 74 + Math.sin(i * 2.9) * 4;
+            } else {
+              xVal = 44 + Math.cos(i * 3.1) * 5;
+            }
+            pos = { x: xVal, y: yVal };
+          } else {
+            pos = desktopPositions[i % desktopPositions.length];
+          }
+          // Calculate pixels directly instead of using viewport strings
+          // This prevents GSAP from triggering a forced layout reflow for unit conversion.
+          const scatteredX = (pos.x + (Math.random() * 3 - 1.5)) * vw;
+          const scatteredY = (pos.y + (Math.random() * 3 - 1.5)) * vh;
           
           // Visual hierarchy: Featured icons are slightly larger and brighter
           const randomScale = featured 
@@ -293,7 +317,7 @@ export default function About() {
 
           // ENTRY: Gravity Rise from bottom
           mainTl.fromTo(iconEl,
-            { x: scatteredX, y: '120vh', rotation: randomRotation - 30, scale: randomScale * 0.5, opacity: 0 },
+            { x: scatteredX, y: 120 * vh, rotation: randomRotation - 30, scale: randomScale * 0.5, opacity: 0 },
             { 
               y: scatteredY, 
               rotation: randomRotation, 
@@ -308,7 +332,7 @@ export default function About() {
           // EXIT: Float away to top
           mainTl.to(iconEl,
             { 
-              y: '-30vh', 
+              y: -30 * vh, 
               rotation: randomRotation + 30, 
               scale: randomScale * 0.5, 
               opacity: 0, 
@@ -330,39 +354,71 @@ export default function About() {
         @media (max-width: 768px) {
           .story-wrapper {
             align-items: flex-start !important;
-            padding-top: 5vh !important;
+            padding-top: 4vh !important;
           }
           .story-container {
-            max-height: 90vh !important;
-            overflow-y: auto !important;
-            padding-bottom: 2rem !important;
+            max-height: none !important;
+            overflow-y: visible !important;
+            padding-bottom: 2vh !important;
             pointer-events: auto !important;
           }
+          .capabilities-top-label {
+            display: none !important;
+          }
           .story-grid {
-            gap: 2rem !important;
+            gap: 1.2rem !important;
             display: flex !important;
             flex-direction: column !important;
           }
           .story-title {
-            font-size: 2.2rem !important;
-            margin-bottom: 1rem !important;
+            font-size: 1.8rem !important;
+            margin-bottom: 0.5rem !important;
           }
           .story-text {
-            font-size: 0.95rem !important;
-            line-height: 1.5 !important;
-            margin-top: 0.8rem !important;
+            font-size: 0.85rem !important;
+            line-height: 1.4 !important;
+            margin-top: 0.4rem !important;
           }
           .story-subtitle {
-            font-size: 1.3rem !important;
-            margin-bottom: 0.5rem !important;
+            font-size: 1.1rem !important;
+            margin-bottom: 0.3rem !important;
           }
           .tech-info-0, .tech-info-1, .tech-info-2 {
             width: 90vw !important;
-            bottom: 12vh !important;
+            bottom: 4vh !important;
+          }
+          .tech-info-0 h2, .tech-info-1 h2, .tech-info-2 h2 {
+            font-size: 1.8rem !important;
+            margin-bottom: 0.5rem !important;
+          }
+          .tech-info-0 p, .tech-info-1 p, .tech-info-2 p {
+            font-size: 0.82rem !important;
+            line-height: 1.45 !important;
+          }
+          .tech-info-0 div, .tech-info-1 div, .tech-info-2 div {
+            font-size: 0.7rem !important;
           }
           .tech-intro-text-block {
             width: 90vw !important;
-            bottom: 10vh !important;
+            bottom: 6vh !important;
+          }
+          .tech-intro-text-block h1 {
+            font-size: 2.2rem !important;
+            margin-bottom: 0.8rem !important;
+          }
+          .tech-intro-text-block p {
+            font-size: 0.85rem !important;
+            line-height: 1.45 !important;
+          }
+          /* Spacing and scaling overrides to prevent overlaps on small devices */
+          .intro-bg-icon {
+            font-size: 1.6rem !important;
+          }
+          .tech-icon-inner > div {
+            font-size: 1.9rem !important; /* Make mobile active icons slightly smaller */
+          }
+          .tech-icon-inner > span {
+            font-size: 0.58rem !important; /* Make labels smaller */
           }
         }
       `}</style>
@@ -431,6 +487,7 @@ export default function About() {
         </div>
         {/* Top Left Label */}
         <div 
+          className="capabilities-top-label"
           style={{ 
             position: 'absolute', 
             top: '5vh', 
@@ -472,13 +529,17 @@ export default function About() {
                {introBackgroundLinks.map((link, idx) => {
                  const fromIcon = introBackgroundIcons[link.from];
                  const toIcon = introBackgroundIcons[link.to];
+                 const x1 = isMobileView ? mobileIntroPos[link.from].x : fromIcon.x;
+                 const y1 = isMobileView ? mobileIntroPos[link.from].y : fromIcon.y;
+                 const x2 = isMobileView ? mobileIntroPos[link.to].x : toIcon.x;
+                 const y2 = isMobileView ? mobileIntroPos[link.to].y : toIcon.y;
                  return (
                    <line
                      key={idx}
-                     x1={fromIcon.x}
-                     y1={fromIcon.y}
-                     x2={toIcon.x}
-                     y2={toIcon.y}
+                     x1={x1}
+                     y1={y1}
+                     x2={x2}
+                     y2={y2}
                      stroke="rgba(255, 255, 255, 0.03)"
                      strokeWidth="1.2"
                      strokeDasharray="4 4"
@@ -488,14 +549,17 @@ export default function About() {
              </svg>
 
              {/* Background Icons mapped */}
-             {introBackgroundIcons.map(({ Icon, x, y }, i) => (
+             {introBackgroundIcons.map(({ Icon, x, y }, i) => {
+               const posX = isMobileView ? mobileIntroPos[i].x : x;
+               const posY = isMobileView ? mobileIntroPos[i].y : y;
+               return (
                <div
                  key={i}
                  className="intro-bg-icon"
                  style={{
                    position: 'absolute',
-                   left: x,
-                   top: y,
+                   left: posX,
+                   top: posY,
                    transform: 'translate(-50%, -50%)',
                    color: 'rgba(255, 255, 255, 0.075)', // Faint monochrome integration
                    fontSize: 'clamp(2.2rem, 3vw, 4rem)',
@@ -505,7 +569,7 @@ export default function About() {
                >
                  <Icon fontSize="inherit" />
                </div>
-             ))}
+             )})}
               </div>
             </div>
 
@@ -645,7 +709,7 @@ export default function About() {
                     style={{
                       color: featured ? '#ff6b00' : 'rgba(255, 255, 255, 0.45)', // Orange for featured, soft white for secondary
                       filter: featured ? 'drop-shadow(0 0 15px rgba(255, 107, 0, 0.45))' : 'none',
-                      fontSize: 'clamp(2.5rem, 4vw, 4.5rem)',
+                      fontSize: 'clamp(2rem, 4vw, 4.5rem)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center'

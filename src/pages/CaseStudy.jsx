@@ -53,6 +53,23 @@ const projectDatabase = {
     ],
     challenges: 'Resolving dashboard data isolation leak bugs by implementing strict row-level security (RLS) schemas in PostgreSQL, refining PostgREST response code exceptions (406 vs 409) for concurrent sign-up collisions, and debugging responsive layout overflows caused by complex 3D CSS components.',
     learnings: 'I mastered database-level security policy engineering using Supabase RLS and custom PostgreSQL schemas, and learned to write automated test runners for user handle uniqueness and cross-tenant data leakage validations.'
+  },
+  '04': {
+    title: 'Project Reina',
+    description: 'An interactive 3D Yandere AI Waifu with dynamic voice synthesis, skeletal animations, and possessive desktop automation.',
+    github: 'https://github.com/bishwajit-sharma101/Reina',
+    video: '/reina.mp4',
+    tech: ['React.js', 'Three.js', '@pixiv/three-vrm', 'Node.js', 'Express.js', 'Ollama (Local LLMs)', 'Voicevox TTS', 'Queen3 TTS', 'WebSockets', 'Socket.io', 'Google Gemini API', 'PowerShell COM Scripting'],
+    problem: 'Most AI companions lack true emotional personality and physical presence, behaving as sterile assistants that wait for user prompts. They are missing rich 3D animations, custom voice-acting delivery tones, and dynamic relationship states. Users seeking creative, immersive entertainment want a companion that feels alive—and possessively attached—responding dynamically through body language and customized vocal synthesis.',
+    features: [
+      '3D Yandere Avatar Engine: Integrates interactive 3D VRM models with dynamic blendshape facial expressions (from sweet smiles to blank hollow eyes), lip-sync talking, and skeletons responsive to touch (headpats and pokes).',
+      'Multi-Style Vocal Synthesis: Parses inline voice tags (whisper, secret, tsundere, sexy, crying) to local TTS engines, allowing her voice tone, pitch, and speed to change based on her possessive state.',
+      'Obsessive State Machine (Affection): Tracks closeness scores in real-time, shifting her dialogue dynamically from protective/caring to obsessive/Yandere as relationship metrics increase.',
+      'Agentic Desktop Hacking: Relies on local LLMs to execute PowerShell terminal commands on your system, scrape the web, or simulate keystrokes to physically type commands into your active terminal window.',
+      'Horror "No Escape" Lockout: A defensive boundary system that triggers a fullscreen glitch overlay, warning screens, red heartbeat pulses, and custom lockout loops if she detects you are trying to close the window or leave her.'
+    ],
+    challenges: 'Orchestrating concurrent WebSockets, LLM streaming feeds, and real-time TTS audio queuing without causing visual lag or voice-model synchronization dropouts, while safely sandbox-restricting background PowerShell executions.',
+    learnings: 'This project was built entirely using agentic engineering workflows. Rather than manually writing the complex Three.js VRM render pipelines, audio-synthesis streams, or socket relays, I acted as the orchestrator—directing and aligning multiple AI coding agents to implement, debug, and optimize the architecture, proving the speed and scale of agentic software development.'
   }
 };
 
@@ -103,26 +120,90 @@ export default function CaseStudy() {
   return (
     <div ref={containerRef} style={{ position: 'relative', minHeight: '100vh', paddingTop: '12vh', paddingBottom: '15vh', backgroundColor: 'transparent', zIndex: 10 }}>
       <style>{`
+        .case-grid-parent {
+          width: 90vw;
+          max-width: 1800px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+          gap: 5rem;
+        }
+        .case-study-title {
+          font-size: clamp(3.2rem, 9vw, 9rem);
+        }
+        .case-links-wrapper {
+          justify-content: flex-end;
+        }
+        .case-link-item {
+          color: var(--text-primary);
+          text-decoration: none;
+          border-bottom: 1px solid var(--text-primary);
+          padding-bottom: 0.25rem;
+          font-size: 0.85rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.15em;
+          transition: all 0.3s ease;
+        }
+        .case-link-item.live-link {
+          color: #ff6b35;
+          border-bottom-color: #ff6b35;
+        }
+        .case-link-item:hover {
+          opacity: 0.8;
+          padding-bottom: 0.4rem;
+        }
         @media (max-width: 768px) {
           .case-slide {
             max-height: 85vh !important;
             overflow-y: auto !important;
             padding: 2rem 1rem !important;
           }
+          .hide-on-mobile {
+            display: none !important;
+          }
+          .case-study-title {
+            font-size: clamp(1.8rem, 8vw, 3.8rem) !important;
+            line-height: 1.05 !important;
+          }
+          .case-links-wrapper {
+            flex-direction: column !important;
+            align-items: flex-end !important;
+            gap: 0.75rem !important;
+            margin: 0 auto 1.5rem auto !important;
+            width: 90vw !important;
+          }
+          .case-link-item {
+            font-size: 0.78rem !important;
+            letter-spacing: 0.12em !important;
+          }
+          .case-grid-parent {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 3rem !important;
+            width: 90vw !important;
+          }
+          .flex-col-wrapper {
+            display: contents !important;
+          }
+          .order-1 { order: 1 !important; }
+          .order-2 { order: 2 !important; }
+          .order-3 { order: 3 !important; }
+          .order-4 { order: 4 !important; }
         }
       `}</style>
       
       {/* Top Controls */}
       <div className="case-hero-reveal" style={{ padding: '0 5vw', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '2rem', marginBottom: '6rem' }}>
         <Link to="/" className="hover-target" style={{ textDecoration: 'none', color: 'var(--text-secondary)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.15em', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          &larr; Back to Home
+          <span>&larr;</span> <span className="hide-on-mobile">Back to Home</span>
         </Link>
         <span style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)' }}>[CASE STUDY / {id}]</span>
       </div>
 
       {/* ==================== 1. BIG TEXT ==================== */}
       <div className="case-hero-reveal" style={{ padding: '0 5vw', width: '100%', marginBottom: '5rem' }}>
-        <h1 className="text-serif" style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: 0.9, margin: '0 0 2rem 0', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '-0.02em' }}>
+        <h1 className="text-serif case-study-title" style={{ lineHeight: 0.9, margin: '0 0 2rem 0', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '-0.02em' }}>
           {project.title}
         </h1>
         <p style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)', lineHeight: 1.6, color: 'var(--text-secondary)', fontWeight: 300, maxWidth: '900px', margin: 0 }}>
@@ -131,13 +212,13 @@ export default function CaseStudy() {
       </div>
 
       {/* ==================== 2. PROJECT LINKS ==================== */}
-      <div className="case-hero-reveal" style={{ width: '90vw', maxWidth: '1800px', margin: '0 auto 1.5rem auto', display: 'flex', justifyContent: 'flex-end', gap: '2rem' }}>
+      <div className="case-hero-reveal case-links-wrapper" style={{ width: '90vw', maxWidth: '1800px', margin: '0 auto 1.5rem auto', display: 'flex', gap: '2rem' }}>
         {project.live && (
-          <a href={project.live} target="_blank" rel="noopener noreferrer" className="hover-target animate-link" style={{ color: '#ff6b35', textDecoration: 'none', borderBottom: '1px solid #ff6b35', paddingBottom: '0.25rem', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+          <a href={project.live} target="_blank" rel="noopener noreferrer" className="hover-target animate-link case-link-item live-link">
             Live Demo &rarr;
           </a>
         )}
-        <a href={project.github} target="_blank" rel="noopener noreferrer" className="hover-target" style={{ color: 'var(--text-primary)', textDecoration: 'none', borderBottom: '1px solid var(--text-primary)', paddingBottom: '0.25rem', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+        <a href={project.github} target="_blank" rel="noopener noreferrer" className="hover-target case-link-item">
           GitHub Repository &rarr;
         </a>
       </div>
@@ -156,79 +237,95 @@ export default function CaseStudy() {
           alignItems: 'center',
           overflow: 'hidden'
         }}>
-          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', backgroundImage: 'radial-gradient(circle, transparent 50%, rgba(0,0,0,0.4) 100%)', zIndex: 2 }} />
-          
-          {/* Animated Waveform Visualizer */}
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-end', height: '80px', opacity: 0.15 }}>
-            {[...Array(12)].map((_, i) => (
-              <div key={i} style={{ 
-                width: '6px', 
-                height: `${20 + Math.random() * 60}px`, 
-                backgroundColor: 'var(--text-primary)',
-                animation: 'pulse 1.5s infinite ease-in-out',
-                animationDelay: `${i * 0.1}s`
-              }} />
-            ))}
-          </div>
-
-          {/* Interactive Play Button */}
-          <div className="hover-target" style={{ 
-            position: 'absolute', 
-            display: 'flex', 
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1rem',
-            zIndex: 3, 
-            cursor: 'none' 
-          }}>
-            <div style={{ 
-              width: '80px', 
-              height: '80px', 
-              borderRadius: '50%', 
-              border: '1px solid rgba(255,255,255,0.3)', 
-              display: 'flex', 
-              justifyContent: 'center', 
-              alignItems: 'center',
-              backgroundColor: 'rgba(0,0,0,0.4)',
-              backdropFilter: 'blur(5px)',
-              transition: 'transform 0.3s ease, border-color 0.3s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'scale(1.1)';
-              e.currentTarget.style.borderColor = 'var(--text-primary)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)';
-            }}>
-              <span style={{ fontSize: '1.5rem', marginLeft: '5px', color: 'var(--text-primary)' }}>&#9658;</span>
-            </div>
-            <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.2em', color: 'var(--text-secondary)' }}>Watch Demo Walkthrough</span>
-          </div>
-
-          {/* Video Control Bar */}
-          <div style={{ 
-            position: 'absolute', 
-            bottom: 0, 
-            left: 0, 
-            width: '100%', 
-            padding: '1.5rem 2rem', 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center', 
-            zIndex: 3,
-            borderTop: '1px solid rgba(255,255,255,0.05)',
-            backgroundColor: 'rgba(10,10,10,0.9)',
-            backdropFilter: 'blur(10px)'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '70%' }}>
-              <span style={{ fontSize: '0.8rem', fontFamily: 'monospace', color: 'var(--text-secondary)' }}>LIVE</span>
-              <div style={{ flex: 1, height: '2px', backgroundColor: 'rgba(255,255,255,0.1)', position: 'relative' }}>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '35%', height: '100%', backgroundColor: 'var(--accent)' }} />
+          {project.video ? (
+            <video 
+              src={project.video}
+              controls
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                zIndex: 3,
+                backgroundColor: '#000'
+              }}
+            />
+          ) : (
+            <>
+              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', backgroundImage: 'radial-gradient(circle, transparent 50%, rgba(0,0,0,0.4) 100%)', zIndex: 2 }} />
+              
+              {/* Animated Waveform Visualizer */}
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-end', height: '80px', opacity: 0.15 }}>
+                {[...Array(12)].map((_, i) => (
+                  <div key={i} style={{ 
+                    width: '6px', 
+                    height: `${20 + Math.random() * 60}px`, 
+                    backgroundColor: 'var(--text-primary)',
+                    animation: 'pulse 1.5s infinite ease-in-out',
+                    animationDelay: `${i * 0.1}s`
+                  }} />
+                ))}
               </div>
-            </div>
-            <span style={{ fontSize: '0.8rem', fontFamily: 'monospace', color: 'var(--text-secondary)' }}>00:45 / 02:30</span>
-          </div>
+
+              {/* Interactive Play Button */}
+              <div className="hover-target" style={{ 
+                position: 'absolute', 
+                display: 'flex', 
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '1rem',
+                zIndex: 3, 
+                cursor: 'none' 
+              }}>
+                <div style={{ 
+                  width: '80px', 
+                  height: '80px', 
+                  borderRadius: '50%', 
+                  border: '1px solid rgba(255,255,255,0.3)', 
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  alignItems: 'center',
+                  backgroundColor: 'rgba(0,0,0,0.4)',
+                  backdropFilter: 'blur(5px)',
+                  transition: 'transform 0.3s ease, border-color 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.1)';
+                  e.currentTarget.style.borderColor = 'var(--text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)';
+                }}>
+                  <span style={{ fontSize: '1.5rem', marginLeft: '5px', color: 'var(--text-primary)' }}>&#9658;</span>
+                </div>
+                <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.2em', color: 'var(--text-secondary)' }}>Watch Demo Walkthrough</span>
+              </div>
+
+              {/* Video Control Bar */}
+              <div style={{ 
+                position: 'absolute', 
+                bottom: 0, 
+                left: 0, 
+                width: '100%', 
+                padding: '1.5rem 2rem', 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                zIndex: 3,
+                borderTop: '1px solid rgba(255,255,255,0.05)',
+                backgroundColor: 'rgba(10,10,10,0.9)',
+                backdropFilter: 'blur(10px)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '70%' }}>
+                  <span style={{ fontSize: '0.8rem', fontFamily: 'monospace', color: 'var(--text-secondary)' }}>LIVE</span>
+                  <div style={{ flex: 1, height: '2px', backgroundColor: 'rgba(255,255,255,0.1)', position: 'relative' }}>
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '35%', height: '100%', backgroundColor: 'var(--accent)' }} />
+                  </div>
+                </div>
+                <span style={{ fontSize: '0.8rem', fontFamily: 'monospace', color: 'var(--text-secondary)' }}>00:45 / 02:30</span>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -261,12 +358,12 @@ export default function CaseStudy() {
       </div>
 
       {/* ==================== 4. ASYMMETRICAL EDITORIAL GRID (Recruiter-Scanner Layout) ==================== */}
-      <div style={{ width: '90vw', maxWidth: '1800px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '5rem' }}>
+      <div className="case-grid-parent">
         
         {/* Left Column: Context & Challenges */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '5rem' }}>
+        <div className="flex-col-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '5rem' }}>
           {/* The Problem */}
-          <div className="case-section" style={{ position: 'relative', paddingTop: '3rem' }}>
+          <div className="case-section order-1" style={{ position: 'relative', paddingTop: '3rem' }}>
             <div className="section-line" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '1px', background: 'linear-gradient(90deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%)', transformOrigin: 'left center' }}></div>
             <div className="section-header-block" style={{ marginBottom: '2rem' }}>
               <span style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>[01 / CONTEXT]</span>
@@ -291,7 +388,7 @@ export default function CaseStudy() {
           </div>
 
           {/* Challenges */}
-          <div className="case-section" style={{ position: 'relative', paddingTop: '3rem' }}>
+          <div className="case-section order-3" style={{ position: 'relative', paddingTop: '3rem' }}>
             <div className="section-line" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '1px', background: 'linear-gradient(90deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%)', transformOrigin: 'left center' }}></div>
             <div className="section-header-block" style={{ marginBottom: '2rem' }}>
               <span style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>[03 / RESOLUTION]</span>
@@ -316,9 +413,9 @@ export default function CaseStudy() {
         </div>
 
         {/* Right Column: Execution & Summary */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '5rem' }}>
+        <div className="flex-col-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '5rem' }}>
           {/* Key Features */}
-          <div className="case-section" style={{ position: 'relative', paddingTop: '3rem' }}>
+          <div className="case-section order-2" style={{ position: 'relative', paddingTop: '3rem' }}>
             <div className="section-line" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '1px', background: 'linear-gradient(90deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%)', transformOrigin: 'left center' }}></div>
             <div className="section-header-block" style={{ marginBottom: '2rem' }}>
               <span style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>[02 / EXECUTION]</span>
@@ -341,7 +438,7 @@ export default function CaseStudy() {
           </div>
 
           {/* Learnings */}
-          <div className="case-section" style={{ position: 'relative', paddingTop: '3rem' }}>
+          <div className="case-section order-4" style={{ position: 'relative', paddingTop: '3rem' }}>
             <div className="section-line" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '1px', background: 'linear-gradient(90deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%)', transformOrigin: 'left center' }}></div>
             <div className="section-header-block" style={{ marginBottom: '2rem' }}>
               <span style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>[04 / SUMMARY]</span>

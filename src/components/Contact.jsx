@@ -79,10 +79,26 @@ export default function Contact() {
         </div>
       </div>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .contact-footer-bar {
+            flex-direction: column-reverse !important;
+            gap: 1.5rem !important;
+            align-items: center !important;
+            text-align: center !important;
+            padding-bottom: 5vh !important;
+          }
+          .copyright-text {
+            font-size: 0.68rem !important;
+            line-height: 1.5 !important;
+          }
+        }
+      `}</style>
+
       {/* Footer Bottom Bar */}
-      <div className="contact-reveal" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2rem 0', borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: 'auto' }}>
-        <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>&copy; {new Date().getFullYear()} Bishwajit Sharma. All Rights Reserved.</p>
-        <button onClick={scrollToTop} className="hover-target" style={{ background: 'none', border: 'none', color: 'var(--text-primary)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'none' }}>
+      <div className="contact-reveal contact-footer-bar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2rem 0', borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: 'auto' }}>
+        <p className="copyright-text" style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.1em', margin: 0 }}>&copy; {new Date().getFullYear()} Bishwajit Sharma. All Rights Reserved.</p>
+        <button onClick={scrollToTop} className="hover-target back-to-top-btn" style={{ background: 'none', border: 'none', color: 'var(--text-primary)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'none' }}>
           Back to Top &uarr;
         </button>
       </div>

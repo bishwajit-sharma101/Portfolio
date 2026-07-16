@@ -247,143 +247,260 @@ export default function Hero() {
   return (
     <section ref={containerRef} className="hero-section" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', position: 'relative', backgroundColor: 'transparent' }}>
       
-      <style>{`
-        @media (max-width: 768px) {
-          .floating-tag-outer {
-            position: static !important;
-            margin: 0.5rem 0.8rem !important;
+      {/* ======================= MOBILE BENTO GRID (Hidden on Desktop) ======================= */}
+      <div className="hero-mobile-wrapper">
+        <style>{`
+          .hero-mobile-wrapper {
+            display: none;
           }
-          .floating-tags-container {
-            position: absolute !important;
-            top: 10vh !important;
-            left: 0 !important;
-            width: 100vw !important;
-            display: flex !important;
-            flex-wrap: wrap !important;
-            justify-content: center !important;
-            align-items: center !important;
+          .hero-desktop-wrapper {
+            display: contents;
           }
-          .hero-meta {
-            display: none !important;
-          }
-          .hero-title-word {
-            font-size: clamp(2.2rem, 12vw, 5rem) !important;
-          }
-        }
-      `}</style>
+          @media (max-width: 768px) {
+            .hero-desktop-wrapper {
+              display: none !important;
+            }
+            .hero-section {
+              padding: 0 !important;
+              justify-content: flex-start !important;
+              align-items: stretch !important;
+              display: block !important;
+            }
+            .hero-mobile-wrapper {
+              display: flex;
+              flex-direction: column;
+              width: 100%;
+              min-height: 100vh;
+              padding: 12vh 6vw 6vh 6vw;
+              box-sizing: border-box;
+              background: transparent;
+              position: relative;
+              overflow: hidden;
+            }
+            
+            .reveal-item {
+              opacity: 0;
+              animation: reveal-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            
+            @keyframes reveal-up {
+              0% {
+                transform: translateY(40px);
+                opacity: 0;
+              }
+              100% {
+                transform: translateY(0);
+                opacity: 1;
+              }
+            }
+            
+            @keyframes marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            
+            @keyframes stroke-glow {
+              0% { -webkit-text-stroke-color: rgba(255,255,255,0.7); }
+              50% { -webkit-text-stroke-color: rgba(255,107,53,0.9); }
+              100% { -webkit-text-stroke-color: rgba(255,255,255,0.7); }
+            }
+            
+            @keyframes pulse-soft {
+              0% { transform: scale(1); opacity: 0.7; }
+              100% { transform: scale(1.2); opacity: 1; }
+            }
 
-      {/* ==================== CENTERED HORIZONTAL TAGS ROW (Positioned above the name) ==================== */}
-      <div className="floating-tags-container">
-        {floatingTags.map((tag, i) => (
-          <div 
-            key={i} 
-            className="floating-tag-outer" 
-            onMouseEnter={handleTagEnter}
-            onMouseLeave={handleTagLeave}
-            style={{ 
-              position: 'absolute', 
-              top: '10vh', // Elevated near top of the viewport to prevent letter collisions
-              left: tag.left || 'auto',
-              right: tag.right || 'auto',
-              zIndex: 5
-            }}
-          >
-            <div 
-              className="floating-tag-inner" 
-              style={{
-                fontFamily: 'monospace',
-                fontSize: 'clamp(0.75rem, 1.2vw, 0.9rem)',
-                letterSpacing: '0.2em',
-                color: 'var(--text-primary)', // Crisp white
-                display: 'flex',
-                alignItems: 'center',
-                whiteSpace: 'nowrap',
-                willChange: 'transform, opacity'
-              }}
-            >
-              {/* Minimal orange accent dot instead of boxes */}
-              <span style={{ color: '#ff6b35', marginRight: '0.6rem', fontSize: '1.2rem', lineHeight: 1 }}>•</span>
-              {tag.label}
-            </div>
+            @keyframes bounce-subtle {
+              0% { transform: translateY(0); }
+              100% { transform: translateY(-4px); }
+            }
+          }
+        `}</style>
+
+        {/* Ambient Marquee Background (Looping infinitely behind the text) */}
+        <div style={{
+          position: 'absolute',
+          top: '30vh',
+          left: 0,
+          width: '100%',
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+          pointerEvents: 'none',
+          zIndex: 0,
+          opacity: 0.04
+        }}>
+          <div style={{ display: 'inline-block', fontSize: '10vh', fontWeight: '900', textTransform: 'uppercase', color: 'transparent', WebkitTextStroke: '1px white', fontFamily: 'sans-serif', animation: 'marquee 25s linear infinite', paddingRight: '2rem' }}>
+            CREATIVE ENGINEER • FULLSTACK DEVELOPER • PROBLEM SOLVER • UI ARCHITECT • 
           </div>
-        ))}
-      </div>
+          <div style={{ display: 'inline-block', fontSize: '10vh', fontWeight: '900', textTransform: 'uppercase', color: 'transparent', WebkitTextStroke: '1px white', fontFamily: 'sans-serif', animation: 'marquee 25s linear infinite', paddingRight: '2rem' }}>
+            CREATIVE ENGINEER • FULLSTACK DEVELOPER • PROBLEM SOLVER • UI ARCHITECT • 
+          </div>
+        </div>
 
-      {/* Massive Kinetic Typography */}
-      <div style={{ textAlign: 'center', zIndex: 6 }}>
-        <div className="hero-word-container" style={{ overflow: 'hidden', display: 'block', paddingTop: '0.4em', marginTop: '-0.4em', paddingBottom: '0.8em', marginBottom: '-0.8em' }}>
-          <h1 ref={textRef1} className="text-serif hero-word hero-title-word hover-target" style={{ fontSize: 'clamp(4rem, 16vw, 18rem)', lineHeight: 0.8, margin: 0, textTransform: 'uppercase', color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>
-            {"BISHWAJIT".split('').map((char, index) => (
-              <span 
-                key={index} 
-                className="name-char" 
-                onMouseEnter={handleCharEnter}
-                onMouseLeave={handleCharLeave}
-                style={{ display: 'inline-block', cursor: 'default', willChange: 'transform, color' }}
-              >
-                {char}
-              </span>
-            ))}
-          </h1>
-        </div>
-        <div className="hero-word-container" style={{ overflow: 'hidden', display: 'block', marginTop: 'calc(-2vw - 0.4em)', paddingTop: '0.4em', paddingBottom: '0.8em', marginBottom: '-0.8em' }}>
-          <h1 ref={textRef2} className="text-serif hero-word hero-title-word hover-target" style={{ fontSize: 'clamp(4rem, 16vw, 18rem)', lineHeight: 0.8, margin: 0, textTransform: 'uppercase', color: 'var(--text-primary)', whiteSpace: 'nowrap', marginLeft: '10vw' }}>
-            {"SHARMA".split('').map((char, index) => (
-              <span 
-                key={index} 
-                className="name-char" 
-                onMouseEnter={handleCharEnter}
-                onMouseLeave={handleCharLeave}
-                style={{ display: 'inline-block', cursor: 'default', willChange: 'transform, color' }}
-              >
-                {char}
-              </span>
-            ))}
-            <span 
-              className="name-char" 
-              onMouseEnter={handleCharEnter}
-              onMouseLeave={(e) => {
-                gsap.to(e.currentTarget, {
-                  scale: 1,
-                  y: 0,
-                  color: '#ff6b35',
-                  duration: 0.4,
-                  ease: 'power2.out'
-                });
-              }}
-              style={{ display: 'inline-block', cursor: 'default', color: '#ff6b35', willChange: 'transform, color' }}
-            >
-              .
-            </span>
-          </h1>
-        </div>
-        
-        {/* Funny Keyboard smash hint indicator */}
-        <div className="key-hint" style={{ marginTop: '2.5rem', fontFamily: 'monospace', fontSize: '0.75rem', letterSpacing: '0.2em', color: '#ff6b35', opacity: 0.5, textTransform: 'uppercase' }}>
-          [ PRESS ANY KEY TO INTERACT ]
-        </div>
-      </div>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', zIndex: 1, position: 'relative' }}>
+          
+          <div style={{ overflow: 'hidden' }}>
+            <h1 className="reveal-item" style={{ fontSize: 'clamp(3.5rem, 15vw, 5rem)', lineHeight: 0.9, margin: 0, color: 'white', textTransform: 'uppercase', fontFamily: 'serif', letterSpacing: '-0.02em', animationDelay: '0.3s' }}>
+              Bishwajit
+            </h1>
+          </div>
+          <div style={{ overflow: 'hidden', marginTop: '0.2rem' }}>
+            <h1 className="reveal-item" style={{ fontSize: 'clamp(3.5rem, 15vw, 5rem)', lineHeight: 0.9, margin: 0, textTransform: 'uppercase', fontFamily: 'serif', letterSpacing: '-0.02em', animationDelay: '0.5s' }}>
+              <span style={{ color: 'transparent', WebkitTextStroke: '1px rgba(255,255,255,0.7)', animation: 'stroke-glow 6s infinite ease-in-out' }}>Sharma.</span>
+            </h1>
+          </div>
 
-      {/* Editorial Meta Data */}
-      <div className="hero-meta" style={{ position: 'absolute', bottom: '5vh', left: '5vw', maxWidth: '350px', zIndex: 6 }}>
-         <p style={{ fontSize: '0.9rem', lineHeight: 1.8, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-            <strong style={{ color: 'var(--text-primary)' }}>Fullstack Developer</strong> <br/> 
+          <h2 className="reveal-item" style={{ fontSize: '1.2rem', fontWeight: 500, marginTop: '2.5rem', color: 'var(--text-primary)', letterSpacing: '-0.02em', fontFamily: 'sans-serif', animationDelay: '0.7s' }}>
+            Fullstack Developer
+          </h2>
+          
+          <p className="reveal-item" style={{ fontSize: '0.9rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.6)', marginTop: '0.8rem', maxWidth: '90%', fontFamily: 'sans-serif', animationDelay: '0.9s' }}>
             Building premium digital experiences with robust architectural logic and high-end aesthetic execution.
-         </p>
+          </p>
+
+          <div className="reveal-item" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '2.5rem', animationDelay: '1.1s' }}>
+            {['DEV', 'ENGINEER', 'FULLSTACK', 'UI ARCHITECT'].map(tag => (
+              <span key={tag} style={{ fontSize: '0.65rem', border: '1px solid rgba(255,255,255,0.2)', padding: '0.4rem 0.8rem', borderRadius: '20px', color: 'rgba(255,255,255,0.8)', letterSpacing: '0.1em', fontFamily: 'monospace' }}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="reveal-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1.5rem', marginTop: '3rem', zIndex: 1, position: 'relative', animationDelay: '1.3s' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <span style={{ 
+                fontSize: '0.65rem', 
+                textTransform: 'uppercase', 
+                letterSpacing: '0.12em', 
+                color: '#ff6b35', 
+                fontFamily: 'monospace',
+                border: '1px solid rgba(255, 107, 53, 0.35)',
+                padding: '2px 6px',
+                borderRadius: '4px',
+                display: 'inline-block'
+              }}>
+                Available for work
+              </span>
+            </div>
+            <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em', display: 'block', marginTop: '6px', fontFamily: 'monospace', textTransform: 'uppercase' }}>Global / Remote</span>
+          </div>
+          <div style={{ fontSize: '0.65rem', letterSpacing: '0.2em', color: '#ff6b35', textTransform: 'uppercase', fontFamily: 'monospace', animation: 'bounce-subtle 1s infinite alternate ease-in-out' }}>
+            Scroll ↓
+          </div>
+        </div>
       </div>
 
-      {/* Center Void Scroll Indicator */}
-      <div className="scroll-indicator" style={{ position: 'absolute', bottom: '4vh', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', zIndex: 6 }}>
-         <span style={{ fontSize: '0.62rem', fontFamily: 'monospace', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Scroll to Explore</span>
-         <div style={{ width: '20px', height: '32px', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '10px', position: 'relative', display: 'flex', justifyContent: 'center' }}>
-            <div className="scroll-dot" style={{ width: '2px', height: '6px', backgroundColor: '#ff6b35', borderRadius: '1px', marginTop: '6px', willChange: 'transform, opacity' }}></div>
-         </div>
-      </div>
+      {/* ======================= DESKTOP LAYOUT (Hidden on Mobile) ======================= */}
+      <div className="hero-desktop-wrapper">
+        <div className="floating-tags-container">
+          {floatingTags.map((tag, i) => (
+            <div 
+              key={i} 
+              className="floating-tag-outer" 
+              onMouseEnter={handleTagEnter}
+              onMouseLeave={handleTagLeave}
+              style={{ 
+                position: 'absolute', 
+                top: '10vh',
+                left: tag.left || 'auto',
+                right: tag.right || 'auto',
+                zIndex: 5
+              }}
+            >
+              <div 
+                className="floating-tag-inner" 
+                style={{
+                  fontFamily: 'monospace',
+                  fontSize: 'clamp(0.75rem, 1.2vw, 0.9rem)',
+                  letterSpacing: '0.2em',
+                  color: 'var(--text-primary)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  whiteSpace: 'nowrap',
+                  willChange: 'transform, opacity'
+                }}
+              >
+                <span style={{ color: '#ff6b35', marginRight: '0.6rem', fontSize: '1.2rem', lineHeight: 1 }}>•</span>
+                {tag.label}
+              </div>
+            </div>
+          ))}
+        </div>
 
-      <div className="hero-meta" style={{ position: 'absolute', bottom: '5vh', right: '5vw', textAlign: 'right', zIndex: 6 }}>
-         <p style={{ fontSize: '0.75rem', letterSpacing: '0.2em', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>Available for Work</p>
-         <p style={{ fontSize: '0.75rem', letterSpacing: '0.2em', color: 'var(--text-secondary)', textTransform: 'uppercase', marginTop: '0.5rem' }}>Global / Remote</p>
-         <div style={{ width: '1px', height: '40px', backgroundColor: 'rgba(255,255,255,0.2)', margin: '1rem 0 0 auto' }}></div>
+        <div className="hero-name-container" style={{ textAlign: 'center', zIndex: 6 }}>
+          <div className="hero-word-container" style={{ overflow: 'hidden', display: 'block', paddingTop: '0.4em', marginTop: '-0.4em', paddingBottom: '0.8em', marginBottom: '-0.8em' }}>
+            <h1 ref={textRef1} className="text-serif hero-word hover-target" style={{ fontSize: 'clamp(4rem, 16vw, 18rem)', lineHeight: 0.8, margin: 0, textTransform: 'uppercase', color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>
+              {"BISHWAJIT".split('').map((char, index) => (
+                <span 
+                  key={index} 
+                  className="name-char" 
+                  onMouseEnter={handleCharEnter}
+                  onMouseLeave={handleCharLeave}
+                  style={{ display: 'inline-block', cursor: 'default', willChange: 'transform, color' }}
+                >
+                  {char}
+                </span>
+              ))}
+            </h1>
+          </div>
+          <div className="hero-word-container" style={{ overflow: 'hidden', display: 'block', marginTop: 'calc(-2vw - 0.4em)', paddingTop: '0.4em', paddingBottom: '0.8em', marginBottom: '-0.8em' }}>
+            <h1 ref={textRef2} className="text-serif hero-word hover-target" style={{ fontSize: 'clamp(4rem, 16vw, 18rem)', lineHeight: 0.8, margin: 0, textTransform: 'uppercase', color: 'var(--text-primary)', whiteSpace: 'nowrap', marginLeft: '10vw' }}>
+              {"SHARMA".split('').map((char, index) => (
+                <span 
+                  key={index} 
+                  className="name-char" 
+                  onMouseEnter={handleCharEnter}
+                  onMouseLeave={handleCharLeave}
+                  style={{ display: 'inline-block', cursor: 'default', willChange: 'transform, color' }}
+                >
+                  {char}
+                </span>
+              ))}
+              <span 
+                className="name-char" 
+                onMouseEnter={handleCharEnter}
+                onMouseLeave={(e) => {
+                  gsap.to(e.currentTarget, {
+                    scale: 1,
+                    y: 0,
+                    color: '#ff6b35',
+                    duration: 0.4,
+                    ease: 'power2.out'
+                  });
+                }}
+                style={{ display: 'inline-block', cursor: 'default', color: '#ff6b35', willChange: 'transform, color' }}
+              >
+                .
+              </span>
+            </h1>
+          </div>
+          
+          <div className="key-hint" style={{ marginTop: '2.5rem', fontFamily: 'monospace', fontSize: '0.75rem', letterSpacing: '0.2em', color: '#ff6b35', opacity: 0.5, textTransform: 'uppercase' }}>
+            [ PRESS ANY KEY TO INTERACT ]
+          </div>
+        </div>
+
+        <div className="hero-meta hero-meta-left" style={{ position: 'absolute', bottom: '5vh', left: '5vw', maxWidth: '350px', zIndex: 6 }}>
+           <p style={{ fontSize: '0.9rem', lineHeight: 1.8, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+              <strong style={{ color: 'var(--text-primary)' }}>Fullstack Developer</strong> <br/> 
+              Building premium digital experiences with robust architectural logic and high-end aesthetic execution.
+           </p>
+        </div>
+
+        <div className="scroll-indicator hero-scroll-indicator" style={{ position: 'absolute', bottom: '4vh', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', zIndex: 6 }}>
+           <span style={{ fontSize: '0.62rem', fontFamily: 'monospace', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Scroll to Explore</span>
+           <div style={{ width: '20px', height: '32px', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '10px', position: 'relative', display: 'flex', justifyContent: 'center' }}>
+              <div className="scroll-dot" style={{ width: '2px', height: '6px', backgroundColor: '#ff6b35', borderRadius: '1px', marginTop: '6px', willChange: 'transform, opacity' }}></div>
+           </div>
+        </div>
+
+        <div className="hero-meta hero-meta-right" style={{ position: 'absolute', bottom: '5vh', right: '5vw', textAlign: 'right', zIndex: 6 }}>
+           <p style={{ fontSize: '0.75rem', letterSpacing: '0.2em', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>Available for Work</p>
+           <p style={{ fontSize: '0.75rem', letterSpacing: '0.2em', color: 'var(--text-secondary)', textTransform: 'uppercase', marginTop: '0.5rem' }}>Global / Remote</p>
+           <div className="hero-meta-line" style={{ width: '1px', height: '40px', backgroundColor: 'rgba(255,255,255,0.2)', margin: '1rem 0 0 auto' }}></div>
+        </div>
       </div>
     </section>
   );
