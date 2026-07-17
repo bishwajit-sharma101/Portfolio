@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 export default function Contact() {
@@ -22,8 +22,6 @@ export default function Contact() {
     return () => ctx.revert();
   }, []);
 
-  const [copied, setCopied] = useState(false);
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -34,8 +32,6 @@ export default function Contact() {
     { 
       label: 'Email', 
       value: 'bishwajitsharma444@gmail.com',
-      copyable: true,
-      copyValue: 'bishwajitsharma444@gmail.com',
       url: isMobileDevice 
         ? 'mailto:bishwajitsharma444@gmail.com' 
         : 'https://mail.google.com/mail/?view=cm&fs=1&to=bishwajitsharma444@gmail.com' 
@@ -51,14 +47,6 @@ export default function Contact() {
       url: 'https://github.com/bishwajit-sharma101' 
     }
   ];
-
-  const handleCopyEmail = (e, val) => {
-    e.preventDefault();
-    e.stopPropagation();
-    navigator.clipboard.writeText(val);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
     <footer id="contact" ref={footerRef} className="contact-section" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', padding: '15vh 5vw 4vh 5vw', backgroundColor: 'transparent', position: 'relative', zIndex: 10 }}>
@@ -103,42 +91,8 @@ export default function Contact() {
                 </div>
               </div>
               
-              {/* Right Side: Copy Action and Arrow */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                {channel.copyable && (
-                  <button 
-                    onClick={(e) => handleCopyEmail(e, channel.copyValue)}
-                    className="hover-target copy-badge-btn"
-                    style={{
-                      background: 'none',
-                      border: '1px solid rgba(255,255,255,0.15)',
-                      padding: '0.45rem 0.95rem',
-                      borderRadius: '100px',
-                      color: 'var(--text-secondary)',
-                      fontSize: '0.7rem',
-                      fontFamily: 'monospace',
-                      letterSpacing: '0.1em',
-                      cursor: 'none',
-                      transition: 'all 0.3s ease',
-                      pointerEvents: 'auto',
-                      outline: 'none'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--accent)';
-                      e.currentTarget.style.color = 'var(--text-primary)';
-                      e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.03)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
-                      e.currentTarget.style.color = 'var(--text-secondary)';
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
-                  >
-                    {copied ? 'COPIED!' : 'COPY'}
-                  </button>
-                )}
-                <span className="index-row-arrow" style={{ fontSize: '2rem' }}>&rarr;</span>
-              </div>
+              {/* Right Side: Arrow */}
+              <span className="index-row-arrow" style={{ fontSize: '2rem' }}>&rarr;</span>
             </a>
           ))}
         </div>
