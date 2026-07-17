@@ -26,8 +26,15 @@ export default function Contact() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const isMobileDevice = typeof navigator !== 'undefined' && /Mobi|Android|iPhone/i.test(navigator.userAgent);
+
   const channels = [
-    { label: 'Email', url: 'https://mail.google.com/mail/?view=cm&fs=1&to=bishwajitsharma444@gmail.com' },
+    { 
+      label: 'Email', 
+      url: isMobileDevice 
+        ? 'mailto:bishwajitsharma444@gmail.com' 
+        : 'https://mail.google.com/mail/?view=cm&fs=1&to=bishwajitsharma444@gmail.com' 
+    },
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/bishwajitsharma-in/' },
     { label: 'GitHub', url: 'https://github.com/bishwajit-sharma101' }
   ];
