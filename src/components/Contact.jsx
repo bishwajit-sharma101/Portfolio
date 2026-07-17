@@ -84,10 +84,10 @@ export default function Contact() {
             >
               {/* Left Side: Number Index and Platform Name with Handle */}
               <div className="index-row-content" style={{ display: 'flex', alignItems: 'center', gap: '3rem' }}>
-                <span style={{ fontSize: '0.85rem', fontFamily: 'monospace', color: 'var(--text-secondary)', width: '40px' }}>0{index + 1}</span>
+                <span className="index-row-num" style={{ fontSize: '0.85rem', fontFamily: 'monospace', color: 'var(--text-secondary)', width: '40px' }}>0{index + 1}</span>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <span className="text-serif index-row-value" style={{ fontSize: 'clamp(2.5rem, 5vw, 5.5rem)', textTransform: 'uppercase', lineHeight: 1 }}>{channel.label}</span>
-                  <span style={{ fontSize: 'clamp(0.8rem, 1.1vw, 1rem)', fontFamily: 'monospace', color: 'rgba(255,255,255,0.4)', marginTop: '0.5rem', letterSpacing: '0.05em' }}>{channel.value}</span>
+                  <span className="index-row-subvalue" style={{ fontSize: 'clamp(0.8rem, 1.1vw, 1rem)', fontFamily: 'monospace', color: 'rgba(255,255,255,0.4)', marginTop: '0.5rem', letterSpacing: '0.05em' }}>{channel.value}</span>
                 </div>
               </div>
               
@@ -100,6 +100,22 @@ export default function Contact() {
 
       <style>{`
         @media (max-width: 768px) {
+          .index-row {
+            padding: 1.75rem 0.5rem !important;
+          }
+          .index-row-content {
+            gap: 1.25rem !important;
+          }
+          .index-row-num {
+            width: 24px !important;
+          }
+          .index-row-value {
+            font-size: 2rem !important;
+          }
+          .index-row-subvalue {
+            font-size: 0.68rem !important;
+            letter-spacing: 0.02em !important;
+          }
           .contact-footer-bar {
             flex-direction: column-reverse !important;
             gap: 1.5rem !important;
