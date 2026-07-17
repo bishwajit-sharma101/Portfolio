@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 const projectDatabase = {
   '01': {
     title: 'Project Kaevrix',
+    color: '#ff944d',
     description: 'An AI-powered learning platform that organizes scattered educational content into structured, personalized learning journeys.',
     github: 'https://github.com/bishwajit-sharma101/kaevrix',
     tech: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'Redis', 'BullMQ', 'Socket.IO', 'Gemini API', 'YouTube IFrame API', 'JWT Authentication', 'Autocannon'],
@@ -24,6 +25,7 @@ const projectDatabase = {
   },
   '02': {
     title: 'Project Astrix',
+    color: '#66a3ff',
     description: 'An AI-native messaging platform designed to facilitate fluid, context-aware multilingual communication.',
     github: 'https://github.com/bishwajit-sharma101/astrix',
     tech: ['React', 'TypeScript', 'Node.js', 'Express', 'MongoDB', 'WebSockets', 'OpenAI API', 'GSAP', 'Tailwind CSS'],
@@ -39,6 +41,7 @@ const projectDatabase = {
   },
   '03': {
     title: 'Project Memoriant',
+    color: '#ff4d88',
     description: 'A collaborative bookmark and resource management engine built to curate, organize, and securely share knowledge bases across the web.',
     github: 'https://github.com/bishwajit-sharma101/memoriant',
     live: 'https://memoriant.vercel.app/',
@@ -56,6 +59,7 @@ const projectDatabase = {
   },
   '04': {
     title: 'Project Reina',
+    color: '#d946ef',
     description: 'An interactive 3D Yandere AI Waifu with dynamic voice synthesis, skeletal animations, and possessive desktop automation.',
     github: 'https://github.com/bishwajit-sharma101/Reina',
     video: '/reina.mp4',
@@ -215,7 +219,7 @@ export default function CaseStudy() {
       <div className="case-hero-reveal case-links-wrapper" style={{ width: '90vw', maxWidth: '1800px', margin: '0 auto 1.5rem auto', display: 'flex', gap: '2rem' }}>
         {project.live && (
           <a href={project.live} target="_blank" rel="noopener noreferrer" className="hover-target animate-link case-link-item live-link">
-            Live Demo &rarr;
+            Live &rarr;
           </a>
         )}
         <a href={project.github} target="_blank" rel="noopener noreferrer" className="hover-target case-link-item">
@@ -250,81 +254,120 @@ export default function CaseStudy() {
               }}
             />
           ) : (
-            <>
-              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', backgroundImage: 'radial-gradient(circle, transparent 50%, rgba(0,0,0,0.4) 100%)', zIndex: 2 }} />
-              
-              {/* Animated Waveform Visualizer */}
-              <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-end', height: '80px', opacity: 0.15 }}>
-                {[...Array(12)].map((_, i) => (
-                  <div key={i} style={{ 
-                    width: '6px', 
-                    height: `${20 + Math.random() * 60}px`, 
-                    backgroundColor: 'var(--text-primary)',
-                    animation: 'pulse 1.5s infinite ease-in-out',
-                    animationDelay: `${i * 0.1}s`
-                  }} />
-                ))}
-              </div>
+            <div style={{
+              width: '100%',
+              height: '100%',
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              background: '#09090b',
+              overflow: 'hidden'
+            }}>
+              {/* Fine Tech Grid overlay */}
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundImage: `
+                  linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px)
+                `,
+                backgroundSize: '40px 40px',
+                backgroundPosition: 'center',
+                pointerEvents: 'none'
+              }} />
 
-              {/* Interactive Play Button */}
-              <div className="hover-target" style={{ 
-                position: 'absolute', 
-                display: 'flex', 
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '1rem',
-                zIndex: 3, 
-                cursor: 'none' 
-              }}>
-                <div style={{ 
-                  width: '80px', 
-                  height: '80px', 
-                  borderRadius: '50%', 
-                  border: '1px solid rgba(255,255,255,0.3)', 
-                  display: 'flex', 
-                  justifyContent: 'center', 
-                  alignItems: 'center',
-                  backgroundColor: 'rgba(0,0,0,0.4)',
-                  backdropFilter: 'blur(5px)',
-                  transition: 'transform 0.3s ease, border-color 0.3s ease'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'scale(1.1)';
-                  e.currentTarget.style.borderColor = 'var(--text-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)';
-                }}>
-                  <span style={{ fontSize: '1.5rem', marginLeft: '5px', color: 'var(--text-primary)' }}>&#9658;</span>
-                </div>
-                <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.2em', color: 'var(--text-secondary)' }}>Watch Demo Walkthrough</span>
-              </div>
+              {/* Radial gradient glow matched to project color */}
+              <div style={{
+                position: 'absolute',
+                width: '30vw',
+                height: '30vw',
+                borderRadius: '50%',
+                background: `radial-gradient(circle, ${project.color || '#ff6b35'}0c 0%, transparent 70%)`,
+                filter: 'blur(40px)',
+                pointerEvents: 'none',
+                zIndex: 1,
+                animation: 'pulseGlow 4s infinite ease-in-out'
+              }} />
 
-              {/* Video Control Bar */}
-              <div style={{ 
-                position: 'absolute', 
-                bottom: 0, 
-                left: 0, 
-                width: '100%', 
-                padding: '1.5rem 2rem', 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center', 
+              {/* Dotted HUD Circles */}
+              <div style={{
+                position: 'absolute',
+                width: '160px',
+                height: '160px',
+                borderRadius: '50%',
+                border: `1px dashed ${(project.color || '#ff6b35')}25`,
+                animation: 'spinClockwise 25s linear infinite',
+                zIndex: 2
+              }} />
+              <div style={{
+                position: 'absolute',
+                width: '130px',
+                height: '130px',
+                borderRadius: '50%',
+                border: '1px dotted rgba(255,255,255,0.06)',
+                animation: 'spinCounterClockwise 15s linear infinite',
+                zIndex: 2
+              }} />
+
+              {/* Glowing Core Dot */}
+              <div style={{
+                position: 'relative',
+                width: '8px',
+                height: '8px',
+                borderRadius: '50%',
+                backgroundColor: project.color || '#ff6b35',
+                boxShadow: `0 0 15px ${project.color || '#ff6b35'}`,
+                marginBottom: '2rem',
                 zIndex: 3,
-                borderTop: '1px solid rgba(255,255,255,0.05)',
-                backgroundColor: 'rgba(10,10,10,0.9)',
-                backdropFilter: 'blur(10px)'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '70%' }}>
-                  <span style={{ fontSize: '0.8rem', fontFamily: 'monospace', color: 'var(--text-secondary)' }}>LIVE</span>
-                  <div style={{ flex: 1, height: '2px', backgroundColor: 'rgba(255,255,255,0.1)', position: 'relative' }}>
-                    <div style={{ position: 'absolute', top: 0, left: 0, width: '35%', height: '100%', backgroundColor: 'var(--accent)' }} />
-                  </div>
-                </div>
-                <span style={{ fontSize: '0.8rem', fontFamily: 'monospace', color: 'var(--text-secondary)' }}>00:45 / 02:30</span>
+                animation: 'pulseCore 2s infinite ease-in-out'
+              }} />
+
+              {/* Monospace Tech Labels */}
+              <div style={{ zIndex: 3, textAlign: 'center', padding: '0 2rem' }}>
+                <h3 className="text-serif" style={{ 
+                  fontSize: 'clamp(1.4rem, 2.5vw, 2.2rem)', 
+                  margin: '0 0 0.75rem 0', 
+                  color: '#fff', 
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  Walkthrough Coming Soon
+                </h3>
+                
+                <p style={{ 
+                  fontSize: 'clamp(0.85rem, 1.2vw, 1.05rem)', 
+                  lineHeight: 1.6, 
+                  color: 'rgba(255,255,255,0.4)', 
+                  fontWeight: 300, 
+                  maxWidth: '420px', 
+                  margin: '0 auto' 
+                }}>
+                  A detailed video walkthrough demonstrating core architectural systems and flows is in production.
+                </p>
               </div>
-            </>
+
+              {/* CSS Animations */}
+              <style>{`
+                @keyframes spinClockwise {
+                  0% { transform: rotate(0deg); }
+                  100% { transform: rotate(360deg); }
+                }
+                @keyframes spinCounterClockwise {
+                  0% { transform: rotate(360deg); }
+                  100% { transform: rotate(0deg); }
+                }
+                @keyframes pulseGlow {
+                  0%, 100% { transform: scale(1); opacity: 0.8; }
+                  50% { transform: scale(1.15); opacity: 1; }
+                }
+                @keyframes pulseCore {
+                  0%, 100% { opacity: 0.8; transform: scale(0.95); }
+                  50% { opacity: 1; transform: scale(1.1); }
+                }
+              `}</style>
+            </div>
           )}
         </div>
       </div>
